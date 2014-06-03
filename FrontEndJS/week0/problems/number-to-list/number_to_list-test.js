@@ -8,16 +8,16 @@ var toList = require('./number_to_list').toList;
 // wrong test since we cannot compare two arrays
 
 exports.testToListWith123 = function(test) {
-  test.equal([1, 2, 3], toList(123));
+  test.deepEqual([1, 2, 3], toList(123));
   test.done();
 };
 
 exports.testToListWith99999 = function(test) {
-  test.equal([9, 9, 9, 9, 9], toList(99999));
+  test.deepEqual([9, 9, 9, 9, 9], toList(99999));
   test.done();
 };
 
 exports.testToListWith123023 = function(test) {
-  test.equal([1, 2, 3, 0, 2, 3], toList(123023));
+  test.deepEqual([1, 2, 3, 0, 2, 3], toList(123023));
   test.done();
 };
