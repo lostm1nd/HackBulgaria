@@ -1,0 +1,9 @@
+#ignore bower client  modules
+bower_components
+
+#ignore node server modules
+node_modules
+
+#ignore task images
+readme-images
+
