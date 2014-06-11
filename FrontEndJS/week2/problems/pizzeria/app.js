@@ -1,9 +1,6 @@
 $(document).ready(function() {
 	'use strict';
 
-	var progressBar = $('.progress-bar'),
-		progressPercent = 0;
-
 	$('#pizzas li').on('click', function() {
 		$('.pizza').removeClass('pizza');
 		$(this).addClass('pizza');
@@ -21,7 +18,8 @@ $(document).ready(function() {
 		if (selectedPizza === '' || selectedSize === ''){
 			alert('You must choose pizza and size.');
 		} else {
-			progressBar.css('width', progressPercent + '%');
+
+			$('.progress-bar').css('width', '0');
 
 			var pizza = getPizzas().find(function(p) {
 				if (p.name === selectedPizza) {
@@ -35,24 +33,16 @@ $(document).ready(function() {
 
 			var order = new PizzaOrder(orderedPizza);
 
-			var interval = pizza.timeMs[selectedSize] / 100,
-				intervalID = setInterval(function() {
-					updateProgress();
-				}, interval);
-
-
 			order.ready(function() {
 				$("#made-pizzas").text(
 					'Your ' + selectedSize + ' ' + selectedPizza +
 					' is ready. Cost: ' +
 					pizza.costLv[selectedSize] + ' lv.'
 					);
-
-				clearInterval(intervalID);
-				progressPercent = 0;
 			});
 
 			order.start();
+			$('.progress-bar').animate({'width': '100%'}, pizza.timeMs[selectedSize]);
 		}
 	});
 
@@ -78,11 +68,6 @@ $(document).ready(function() {
 				  "costLv" : {"small": 3, "medium": 4.2, "large": 5.4},
 				  "timeMs" : {"small": 1400, "medium": 1900, "large": 2300}
 				}];
-	}
-
-	function updateProgress() {
-		progressPercent += 1;
-		progressBar.css('width', (progressPercent) + '%');
 	}
 });
 
