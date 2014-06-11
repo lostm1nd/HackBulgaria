@@ -3,31 +3,45 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Pizzeria</title>
+	<link rel="stylesheet" href="lib/bootstrap.min.css">
+	<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-	<header>
+	<header class="page-header">
 		<h1>Welcome to pizzeria <strong>HackBulgaria</strong></h1>
+		<h2>Pizzas we offer today</h2>
 	</header>
-	<article>
-		<section id="place-order">
-			<h1>Pizzas we offer</h1>
-			<ul id="pizzas">
-				<li>Pepperoni</li>
-				<li>Margherita</li>
-				<li>Quatro staggione</li>
-				<li>Diavola</li>
-				<li>Veggie</li>
-			</ul>
-			<ul id="sizes">
-				<ul>Small</ul>
-				<ul>Medium</ul>
-				<ul>Large</ul>
-			</ul>
-			<button>Order Pizza</button>
-		</section>
-		<section id="get-order">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<h3>Pizzas</h3>
+				<ul id="pizzas">
+					<li>Pepperoni</li>
+					<li>Margherita</li>
+					<li>Quatro staggione</li>
+					<li>Diavola</li>
+					<li>Veggie</li>
+				</ul>
+			</div>
+  			<div class="col-md-6">
+  				<h3>Sizes</h3>
+  				<ul id="sizes">
+					<li>Small</li>
+					<li>Medium</li>
+					<li>Large</li>
+				</ul>
+  			</div>
+		</div>
+		<button type="button" class="btn btn-success btn-lg btn-block">Order</button>
+		<h3 id="made-pizzas">
 			
-		</section>
-	</article>
+		</h3>
+	</div>
+
+	<script src="lib/bootstrap.min.js"></script>
+	<script src="lib/jquery.min.js"></script>
+	<script src="pizza.js"></script>
+	<script src="pizza-order.js"></script>
+	<script src="app.js"></script>
 </body>
 </html>

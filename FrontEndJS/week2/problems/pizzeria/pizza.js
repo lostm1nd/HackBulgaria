@@ -1,6 +1,5 @@
-'use strict';
-
 function Pizza(name, cost, timeToPrepare) {
+  'use strict';
 
   if (!(this instanceof Pizza)) {
     return new Pizza(name, cost, timeToPrepare);
@@ -19,5 +18,3 @@ function Pizza(name, cost, timeToPrepare) {
   };
 
 }
-
-exports.Pizza = Pizza;

@@ -1,7 +1,5 @@
 'use strict';
 
-var Pizza = require('./pizza').Pizza;
-
 function PizzaOrder(pizza) {
 
   if (!(pizza instanceof Pizza)) {
@@ -46,14 +44,3 @@ PizzaOrder.prototype.ready = function ready(callback) {
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-var pizza = new Pizza('Peperoni', 100, 2000);
-
-var order = new PizzaOrder(pizza);
-order.ready(function(pizza, order) {
-  // the pizza is ready now
-  console.log(pizza.getName() + ' is ready.');
-  console.log('Id: ' + order.getId());
-});
-
-order.start();
