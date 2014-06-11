@@ -39,3 +39,8 @@ ul li:hover {
 .pizza, .size {
 	background-color: lightblue;
 }
+
+.progress {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}

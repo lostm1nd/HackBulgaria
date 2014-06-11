@@ -3,6 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Pizzeria</title>
+	<script src="lib/jquery.min.js"></script>
+	<script src="lib/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="lib/bootstrap.min.css">
 	<link rel="stylesheet" href="css/styles.css">
 </head>
@@ -33,13 +35,15 @@
   			</div>
 		</div>
 		<button type="button" class="btn btn-success btn-lg btn-block">Order</button>
+		<div class="progress progress-striped">
+		  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+		  </div>
+		</div>
 		<h3 id="made-pizzas">
 			
 		</h3>
 	</div>
-
-	<script src="lib/bootstrap.min.js"></script>
-	<script src="lib/jquery.min.js"></script>
+	
 	<script src="pizza.js"></script>
 	<script src="pizza-order.js"></script>
 	<script src="app.js"></script>
