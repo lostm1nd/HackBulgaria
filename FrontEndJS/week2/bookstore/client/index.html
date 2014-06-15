@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bookstore</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>HackBulgaria's Bookstore</h1>
+        
+        <div id="books-grid">
+            <script id="book-template" type="text/x-handlebars-template">
+              <div class="col-xs-4">
+                    <h3 data-pages="{{num_pages}}">{{title}}</h3>
+                    <img src="{{image_url}}">
+                    <p>Averege rating: {{average_rating}}</p>
+                    <p>ISBN: {{isbn}}</p>
+                    <p class='description'>{{description}}</p>
+                    <button class="btn btn-info">Read description</button>
+                    <button class="btn btn-success">Add to Cart</button>
+                </div>
+            </script>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Shopping cart:</h1>
+                <p id="total-pages">Total number of pages in cart: <span>0</span></p>
+                <div id="books-in-cart">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/handlebars/handlebars.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

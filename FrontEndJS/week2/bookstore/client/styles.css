@@ -1,0 +1,14 @@
+.col-xs-4 {
+	position: relative;
+}
+
+.description {
+	position: absolute;
+	display: none;
+	top: 0;
+	left: 0;
+	width: 80%;
+	height: 80%;
+	background-color: rgba(150, 150, 150, 0.6);
+	overflow: scroll-y;
+}
