@@ -6,18 +6,19 @@ $(document).ready(function() {
         pagesInCart = parseInt($('#total-pages').find('span').text(), 10);
 
     $(this).parent().appendTo($('#books-in-cart'));
+    $(this).removeClass('btn-success').addClass('btn-danger').text('Remove from cart');
     $('#total-pages').find('span').text(pagesInCart + pagesInBook);
 
   });
 
-  $(document).on('click', '.btn-info', function() {
-    var description = $(this).parent().find('.description');
+  $(document).on('click', '.btn-danger', function() {
+    var pagesInBook = $(this).parent().find('h3').data('pages'),
+        pagesInCart = parseInt($('#total-pages').find('span').text(), 10),
+        rowToWhichToAppend = $(this).parent().data('row');
 
-    if (description.css('display') === 'none') {
-      description.css('display', 'block');
-    } else {
-      description.css('display', '');
-    }
+    $(this).parent().appendTo($('.row[data-row="' + rowToWhichToAppend + '"]'));
+    $(this).removeClass('btn-danger').addClass('btn-success').text('Add to cart');
+    $('#total-pages').find('span').text(pagesInCart - pagesInBook);
 
   });
 
@@ -28,23 +29,25 @@ $(document).ready(function() {
   function displayBooks(books) {
     var source = $('#book-template').html(),
         template = Handlebars.compile(source),
-        colCounter = 0,
-        div = $('<div>').addClass('row');
+        colCounter = 1,
+        rowCounter = 1,
+        div = $('<div>').addClass('row').attr('data-row', rowCounter);
 
     books.forEach(function(book) {
-      var html = template(book);
-
-      if (colCounter < 3) {
-
-        div.append(html);
+      if (colCounter < 4) {
         colCounter += 1;
       } else {
-
         $('#books-grid').append(div);
-        div = $('<div>').addClass('row');
-        div.append(html);
-        colCounter = 1;
+
+        rowCounter += 1;        
+        colCounter = 2;
+
+        div = $('<div>').addClass('row').attr('data-row', rowCounter);
       }
+
+      book.row = rowCounter;
+      var html = template(book);
+      div.append(html);
 
     });
   }
