@@ -39,88 +39,68 @@ $(document).ready(function() {
 		};
 	}
 
-	function startCountingUp(toTime) {
+	function startCountingUp(endTime) {
 		timerInterval = setInterval(function() {
-			var minutesFirstDigit = $(timer[0]).text() | 0,
-				minutesSecondDigit = $(timer[1]).text() | 0,
-				secondsFirstDigit = $(timer[2]).text() | 0,
-				secondsSecondDigit = $(timer[3]).text() | 0;
+			var time = getCurrentTime();
 
-			secondsSecondDigit += 1;
+			time.seconds += 1;
 
-			if (secondsSecondDigit > 9) {
-				secondsSecondDigit = 0;
-				secondsFirstDigit += 1;
-			}
-
-			if (secondsFirstDigit > 5) {
-				secondsFirstDigit = 0;
-				minutesSecondDigit += 1;
-			}
-
-			if (minutesSecondDigit > 9) {
-				minutesSecondDigit = 0;
-				minutesFirstDigit += 1;
+			if (time.seconds > 59) {
+				time.seconds = 0;
+				time.minutes += 1;
 			}
 
 			stopIntervalIfGivenTimeIsReached({
-				minutes: (minutesFirstDigit + '' + minutesSecondDigit) | 0,
-				seconds: (secondsFirstDigit + '' + secondsSecondDigit) | 0
+				minutes: time.minutes,
+				seconds: time.seconds
 			}, {
-				minutes: toTime.minutes,
-				seconds: toTime.seconds
+				endMinutes: endTime.minutes,
+				endSeconds: endTime.seconds
 			});
 
-			$(timer[0]).text(minutesFirstDigit);
-			$(timer[1]).text(minutesSecondDigit);
-			$(timer[2]).text(secondsFirstDigit);
-			$(timer[3]).text(secondsSecondDigit);
-
+			setTimerTo(time);
 		}, 1000);
 	}
 
 	function startCountingDown(fromTime) {
 		timerInterval = setInterval(function() {
-			var minutesFirstDigit = $(timer[0]).text() | 0,
-				minutesSecondDigit = $(timer[1]).text() | 0,
-				secondsFirstDigit = $(timer[2]).text() | 0,
-				secondsSecondDigit = $(timer[3]).text() | 0;
+			var time = getCurrentTime();
 
-			secondsSecondDigit -= 1;
+			time.seconds -= 1;
 
-			if (secondsSecondDigit < 0) {
-				secondsSecondDigit = 9;
-				secondsFirstDigit -= 1;
-			}
-
-			if (secondsFirstDigit < 0) {
-				secondsFirstDigit = 5;
-				minutesSecondDigit -= 1;
-			}
-
-			if (minutesSecondDigit < 0) {
-				minutesSecondDigit = 0;
-				minutesFirstDigit -= 1;
+			if (time.seconds < 0) {
+				time.seconds = 59;
+				time.minutes -= 1;
 			}
 
 			stopIntervalIfGivenTimeIsReached({
-				minutes: (minutesFirstDigit + '' + minutesSecondDigit) | 0,
-				seconds: (secondsFirstDigit + '' + secondsSecondDigit) | 0
+				minutes: time.minutes,
+				seconds: time.seconds
 			}, {
-				minutes: 0,
-				seconds: 0
+				endMinutes: 0,
+				endSeconds: 0
 			});
 
-			$(timer[0]).text(minutesFirstDigit);
-			$(timer[1]).text(minutesSecondDigit);
-			$(timer[2]).text(secondsFirstDigit);
-			$(timer[3]).text(secondsSecondDigit);
-
+			setTimerTo(time);
 		}, 1000);
 	}
 
+	function getCurrentTime() {
+		var minutesFirstDigit = $(timer[0]).text(),
+			minutesSecondDigit = $(timer[1]).text(),
+			secondsFirstDigit = $(timer[2]).text(),
+			secondsSecondDigit = $(timer[3]).text();
+
+		return {
+			minutes: (minutesFirstDigit + '' + minutesSecondDigit) | 0,
+			seconds: (secondsFirstDigit + '' + secondsSecondDigit) | 0
+		};
+	}
+
 	function stopIntervalIfGivenTimeIsReached(time, endTime) {
-		if (time.minutes === endTime.minutes && time.seconds === endTime.seconds) {
+		if (time.minutes === endTime.endMinutes &&
+			time.seconds === endTime.endSeconds) {
+
 			clearInterval(timerInterval);
 		}
 	}
