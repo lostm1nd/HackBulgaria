@@ -31,7 +31,9 @@ $(document).ready(function() {
         template = Handlebars.compile(source),
         colCounter = 1,
         rowCounter = 1,
-        div = $('<div>').addClass('row').attr('data-row', rowCounter);
+        div = $('<div>').addClass('row').attr('data-row', rowCounter),
+        decoderLevelOne = $('<div>'),
+        decoderLevelTwo = $('<div>');
 
     books.forEach(function(book) {
       if (colCounter < 4) {
@@ -45,6 +47,9 @@ $(document).ready(function() {
         div = $('<div>').addClass('row').attr('data-row', rowCounter);
       }
 
+      decoderLevelOne.html(book.description);
+      decoderLevelTwo.html(decoderLevelOne.text());
+      book.description = decoderLevelTwo.text();
       book.row = rowCounter;
       var html = template(book);
       div.append(html);
