@@ -2,8 +2,8 @@
 
 var beerAndFries = function(items) {
 	var beers = [],
-	fries = [],
-	maxScore = 0;
+		fries = [],
+		maxScore = 0;
 
 	// put the scores in two separe
 	// arrays
