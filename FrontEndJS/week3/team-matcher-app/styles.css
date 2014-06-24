@@ -5,23 +5,40 @@
 	background-color: #eee;
 }
 
+#filter-menu {
+	text-align: center;
+	background-color: #666;
+	padding: 10px 15px;
+	margin-left: -25px;
+	margin-right: -25px;
+	margin-bottom: 25px;
+}
+
 #filter-menu select {
 	display: inline-block;
 	width: 30%;
+	margin: 0;
 	margin-left: 1%;
+}
+
+#filter-menu button {
+	width: 10%;
+	padding: 10px 15px;
+	margin: 0;
+	margin-left: 1%;
+}
+#filter-menu .error-message {
+	display: none;
+	margin: 15px -15px 0 -15px;	
 }
 
 .red {
 	color: #f00;
 }
 
-.select-message {
-	display: none;
-}
-
 .row {
 	text-align: center;
-	margin-top: 1%;
+	padding-top: 1.5%;
 	border-bottom: 1px solid #999;
 }
 
@@ -47,4 +64,8 @@
 
 .row .available {
 	width: 10%;
+}
+
+.hovered-row {
+	background-color: rgba(255, 100, 15, 0.35);
 }

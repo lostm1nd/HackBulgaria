@@ -9,9 +9,8 @@
   	<script src="bower_components/foundation/js/vendor/modernizr.js"></script>
 </head>
 <body>
-
 	<div id="wrapper">
-		<div id="filter-menu">
+		<div class="sticky" id="filter-menu">
 			<select id="course-select">
 				<option disabled selected>Choose course</option>
 				<option value="js">Frontend JavaScript</option>
@@ -24,8 +23,10 @@
 			</select>
 			<button id="filter-btn">Filter</button>
 			<button id="show-all-btn">Show all</button>
-			<p class="red select-message">*Both options must be selected.</p>
+			<p class="error-message"><small class="error">*Both options must be selected.</small></p>
 		</div>
+
+		<div id="students"></div>
 	</div>
 
 	<script type="x-handlebars-template" id="student-template">
