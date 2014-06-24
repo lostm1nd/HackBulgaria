@@ -1,29 +1,31 @@
 $(document).ready(function() {
-	// buttons[0] - count up
-	// buttons[1] - count down
-	// buttons[2] - stop & reset
-	// timer[0] - minutes first digit holder
-	// timer[1] - minutes second digit holder
-	// timer[2] - seconds first digit holder
-	// timer[3] - seconds second digit holder
-	var buttons = $('button'),
-		timer = $('#timer span'),
+	// $minFirstDigitSpan - minutes first digit holder
+	// $minSecondDigitSpan - minutes second digit holder
+	// $secFirstDigitSpan - seconds first digit holder
+	// $secSecondDigitSpan - seconds second digit holder
+	var $countUpBtn = $('#count-up'),
+		$countDownBtn = $('#count-down'),
+		$resetBtn = $('#reset'),
+		$minFirstDigitSpan = $('#minute-first-digit'),
+		$minSecondDigitSpan = $('#minute-second-digit'),
+		$secFirstDigitSpan = $('#second-first-digit'),
+		$secSecondDigitSpan = $('#second-second-digit'),
 		timerInterval;
 
-	$(buttons[0]).on('click', function() {
+	$($countUpBtn).on('click', function() {
 		var time = getInput();
 		stopAndResetTimer();
 		startCountingUp(time);
 	});
 
-	$(buttons[1]).on('click', function() {
+	$($countDownBtn).on('click', function() {
 		var time = getInput();
 		stopAndResetTimer();
 		setTimerTo(time);
 		startCountingDown(time);
 	});
 
-	$(buttons[2]).on('click', stopAndResetTimer);
+	$($resetBtn).on('click', stopAndResetTimer);
 
 	function getInput() {
 		var minutes = $('#minutes').val() | 0,
@@ -32,6 +34,11 @@ $(document).ready(function() {
 		while (seconds > 59) {
 		seconds -= 60;
 		minutes += 1;
+		}
+
+		if (minutes >= 100) {
+			minutes = 99;
+			seconds = 59;
 		}
 
 		return {
@@ -87,10 +94,10 @@ $(document).ready(function() {
 	}
 
 	function getCurrentTime() {
-		var minutesFirstDigit = $(timer[0]).text(),
-			minutesSecondDigit = $(timer[1]).text(),
-			secondsFirstDigit = $(timer[2]).text(),
-			secondsSecondDigit = $(timer[3]).text();
+		var minutesFirstDigit = $minFirstDigitSpan.text(),
+			minutesSecondDigit = $minSecondDigitSpan.text(),
+			secondsFirstDigit = $secFirstDigitSpan.text(),
+			secondsSecondDigit = $secSecondDigitSpan.text();
 
 		return {
 			minutes: (minutesFirstDigit + '' + minutesSecondDigit) | 0,
@@ -107,18 +114,18 @@ $(document).ready(function() {
 	}
 
 	function stopAndResetTimer() {
-		$(timer[0]).text(0);
-		$(timer[1]).text(0);
-		$(timer[2]).text(0);
-		$(timer[3]).text(0);
+		$minFirstDigitSpan.text(0);
+		$minSecondDigitSpan.text(0);
+		$secFirstDigitSpan.text(0);
+		$secSecondDigitSpan.text(0);
 		clearInterval(timerInterval);
 	}
 
 	function setTimerTo(time) {
-		$(timer[0]).text((time.minutes / 10) | 0);
-		$(timer[1]).text(time.minutes % 10);
-		$(timer[2]).text((time.seconds / 10) | 0);
-		$(timer[3]).text(time.seconds % 10);
+		$minFirstDigitSpan.text((time.minutes / 10) | 0);
+		$minSecondDigitSpan.text(time.minutes % 10);
+		$secFirstDigitSpan.text((time.seconds / 10) | 0);
+		$secSecondDigitSpan.text(time.seconds % 10);
 	}
 
 });
