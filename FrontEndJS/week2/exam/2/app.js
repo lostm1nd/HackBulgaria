@@ -8,20 +8,20 @@ $(document).ready(function() {
 		$secSecondDigitSpan = $('#second-second-digit'),
 		timerInterval;
 
-	$($countUpBtn).on('click', function() {
+	$countUpBtn.on('click', function() {
 		var time = getInput();
 		stopAndResetTimer();
 		startCountingUp(time);
 	});
 
-	$($countDownBtn).on('click', function() {
+	$countDownBtn.on('click', function() {
 		var time = getInput();
 		stopAndResetTimer();
 		setTimerTo(time);
 		startCountingDown(time);
 	});
 
-	$($resetBtn).on('click', stopAndResetTimer);
+	$resetBtn.on('click', stopAndResetTimer);
 
 	function getInput() {
 		var minutes = Number($('#minutes').val()),
