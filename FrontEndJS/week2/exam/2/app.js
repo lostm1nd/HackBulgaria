@@ -18,6 +18,7 @@ $(document).ready(function() {
 
 	$(buttons[1]).on('click', function() {
 		var time = getInput();
+		stopAndResetTimer();
 		setTimerTo(time);
 		startCountingDown(time);
 	});
