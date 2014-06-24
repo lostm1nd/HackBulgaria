@@ -1,10 +1,14 @@
 'use strict';
 
 var beerAndFries = function(items) {
+	function numericSort(a, b) {
+		return a - b;
+	}
+
 	var beers = [],
 		fries = [],
 		maxScore = 0;
-
+	
 	// put the scores in two separe
 	// arrays
 	items.forEach(function(item) {
@@ -17,13 +21,9 @@ var beerAndFries = function(items) {
 
 	// sort the arrays so that
 	// the max score is last
-	beers.sort(function(a,b) {
-		return a - b;
-	});
+	beers.sort(numericSort);
 
-	fries.sort(function(a,b) {
-		return a - b;
-	});
+	fries.sort(numericSort);
 
 	// combine beers having higher scores
 	// with fries having higher scores
