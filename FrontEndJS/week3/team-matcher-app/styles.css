@@ -1,0 +1,50 @@
+#wrapper {
+	width: 80%;
+	margin: 0 auto;
+	padding: 10px 15px;
+	background-color: #eee;
+}
+
+#filter-menu select {
+	display: inline-block;
+	width: 30%;
+	margin-left: 1%;
+}
+
+.red {
+	color: #f00;
+}
+
+.select-message {
+	display: none;
+}
+
+.row {
+	text-align: center;
+	margin-top: 1%;
+	border-bottom: 1px solid #999;
+}
+
+.row:last-child {
+	border-bottom: 0;
+}
+
+.row p {
+	margin-bottom: 0;
+}
+
+.row .name {
+	width: 40%;
+}
+
+.row .git {
+	width: 10%;
+}
+
+.row .courses {
+	width: 40%;
+}
+
+.row .available {
+	width: 10%;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Hack Bulgaria Team Matcher</title>
+	<link rel="stylesheet" href="bower_components/foundation/css/normalize.css">
+  	<link rel="stylesheet" href="bower_components/foundation/css/foundation.css">
+  	<link rel="stylesheet" href="styles.css">
+  	<script src="bower_components/foundation/js/vendor/modernizr.js"></script>
+</head>
+<body>
+
+	<div id="wrapper">
+		<div id="filter-menu">
+			<select id="course-select">
+				<option disabled selected>Choose course</option>
+				<option value="js">Frontend JavaScript</option>
+				<option value="java">Core Java</option>
+			</select>
+			<select id="time-select">
+				<option disabled selected>Choose group</option>
+				<option value="1">Afternoon</option>
+				<option value="2">Evening</option>
+			</select>
+			<button id="filter-btn">Filter</button>
+			<button id="show-all-btn">Show all</button>
+			<p class="red select-message">*Both options must be selected.</p>
+		</div>
+	</div>
+
+	<script type="x-handlebars-template" id="student-template">
+		{{#each students}}
+		<div class="row" data-name="{{name}}">
+			<div class="column small-3 name">
+				<p>{{name}}</p>
+			</div>
+			<div class="column small-3 git">
+				{{#if github}}
+				<p><a href="{{github}}">GitHub</a></p>
+				{{else}}
+				<p class="red">No Git</p>
+				{{/if}}
+			</div>
+			<div class="column small-3 courses">
+			{{#each courses}}
+				<p>{{name}} <span>{{group}}</span></p>
+			{{/each}}
+			</div>
+			<div class="column small-3 available">
+				<p><input type="checkbox" disabled {{#if available}}checked{{/if}}></p>
+			</div>
+		</div>
+		{{/each}}
+	</script>
+	
+	<script src="bower_components/foundation/js/vendor/jquery.js"></script>
+  	<script src="bower_components/foundation/js/foundation.min.js"></script>
+  	<script src="bower_components/handlebars/handlebars.js"></script>
+	<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+	"jquery": true,
+	"globals": {
+		"_": true,
+		"Handlebars": true
+	}
+}

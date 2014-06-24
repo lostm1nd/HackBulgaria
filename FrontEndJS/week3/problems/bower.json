@@ -1,0 +1,25 @@
+{
+  "name": "week3-problem-solutions",
+  "version": "0.0.0",
+  "homepage": "https://github.com/lostm1nd/HackBulgaria",
+  "authors": [
+    "Deyan Yanakiev <kliomba@abv.bg>"
+  ],
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "~2.4.1",
+    "jquery": "~2.1.1"
+  }
+}
