@@ -13,7 +13,19 @@
 
       $('#filter-btn').on('click', filterStudents);
       $('#show-all-btn').on('click', showAllStudents);
-      $('#group-btn').on('click', groupStudents);
+
+      $('#group-btn').on('click', function() {
+        var availableStudents = $STUDENTS_IN_DOM.filter('.selected')
+        .find('.available').find('input:checked').parent('.row');
+
+        $('#filter-menu').find('.error-message.no-available').hide();
+
+        if(availableStudents.length === 0) {
+          $('#filter-menu').find('.error-message.no-available').show();
+        } else {
+          groupStudents();
+        }
+      });
 
       $('#wrapper').on('mouseenter', '.row', function() {
         $(this).toggleClass('hovered-row');
@@ -72,10 +84,10 @@
         selectedTime = $('#time-select').val(),
         filtered;
 
-    $('#filter-menu').find('.error-message').hide();
+    $('#filter-menu').find('.error-message.no-options').hide();
 
     if (selectedCourse === null || selectedTime === null) {
-      $('#filter-menu').find('.error-message').show();
+      $('#filter-menu').find('.error-message.no-options').show();
 
     } else {
       filtered = STUDENTS.filter(filteringCriteria);
@@ -117,13 +129,11 @@
     $('#course-select').val(0);
     $('#time-select').val(0);
     $('#filter-menu').find('.group-menu').hide();
+    $('#filter-menu').find('.error-message.no-options').hide();
+    $('#filter-menu').find('.error-message.no-available').hide();
 
     $STUDENTS_IN_DOM.each(function() {
-      $(this).find('.team').remove();
-
-      $(this).removeClass('selected')
-        .css('background-color', '')
-        .show();
+      $(this).removeClass('selected').show();
     });
   }
 

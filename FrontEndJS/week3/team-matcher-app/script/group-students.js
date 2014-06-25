@@ -16,8 +16,10 @@ function groupStudents() {
     teamCounter += 1;
   };
 
-  var filteredStudents = $('#students').find('.row.selected'),
-      groupSize = $('#filter-menu').find('.group-menu').find('input').val(),
+  var filteredStudents = $('#students').find('.row.selected')
+    .find('.available').find('input:checked').parent('.row');
+
+  var groupSize = $('#filter-menu').find('.group-menu').find('input').val(),
       $modal = $('#grouped-students-modal');
 
   $modal.empty();
