@@ -23,6 +23,7 @@
 
 #filter-menu button {
 	width: 10%;
+	min-width: 90px;
 	padding: 10px 15px;
 	margin: 0;
 	margin-left: 1%;
@@ -55,7 +56,7 @@
 }
 
 .row .git {
-	width: 10%;
+	width: 15%;
 }
 
 .row .courses {
@@ -63,9 +64,27 @@
 }
 
 .row .available {
-	width: 10%;
+	width: 5%;
 }
 
 .hovered-row {
 	background-color: rgba(255, 100, 15, 0.35);
+}
+
+@media only screen and (max-width: 960px) {
+	#filter-menu select {
+		width: 45%;
+		margin-bottom: 1%;
+	}
+
+	#filter-menu button {
+		width: 15%;
+	}
+
+}
+
+@media only screen and (max-width: 680px) {
+	#wrapper {
+		width: 100%;
+	}
 }
