@@ -45,19 +45,21 @@
 }
 
 #filter-menu .group-menu span {
+	display: inline-block;
 	color: #fff;
 	font-size: 1.3rem;
 }
 
 #filter-menu .group-menu input {
 	display: inline-block;
-	width: 40%;
+	width: 10%;
 	margin: 0;
 }
 /*FILTER MENU STYLING END*/
 
 /*ROW STYLING START*/
 .row {
+	position: relative;
 	text-align: center;
 	padding-top: 1.5%;
 	border-bottom: 1px solid #999;
@@ -73,6 +75,17 @@
 
 .row .name {
 	width: 40%;
+}
+
+.row .team {
+	position: absolute;
+	font-size: 1.1rem;
+	font-weight: bold;
+	top: 0;
+	left: 5px;
+	-webkit-transform: rotate(-30deg);
+	-ms-transform: rotate(-30deg);
+	transform: rotate(-30deg);
 }
 
 .row .git {
