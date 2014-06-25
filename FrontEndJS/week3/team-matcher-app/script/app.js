@@ -127,38 +127,4 @@
     });
   }
 
-  function groupStudents() {
-    var filteredStudents = $('#students').find('.row.selected'),
-        shuffledStudents = _.shuffle(filteredStudents),
-        groupSize = $('#filter-menu').find('.group-menu').find('input').val(),
-        backgroundColor = getRandomRgbColor(),
-        $teamSpan = $('<span>').addClass('team'),
-        teamCounter = 1,
-        peopleInGroup = 0,
-        $modal = $('#grouped-students-modal');
-
-    $modal.empty();
-    groupSize = parseInt(groupSize, 10);
-
-    $(shuffledStudents).each(function(index) {
-      var $clone = $(this).clone();
-
-      $clone.appendTo($modal);
-      $clone.css('background-color', backgroundColor)
-      .find('.name')
-      .prepend($teamSpan.clone().text('Team ' + teamCounter));
-
-      peopleInGroup += 1;
-
-      if (peopleInGroup == groupSize) {
-        backgroundColor = getRandomRgbColor();
-        peopleInGroup = 0;
-        teamCounter += 1;
-      }
-    });
-
-    $modal.append('<a class="close-reveal-modal">&#215;</a>');
-    $modal.foundation('reveal', 'open');
-  }
-
 }());
