@@ -26,7 +26,8 @@ function groupStudents() {
   var $teamSpan = $('<span>').addClass('team'),
       teamCounter = 1,
       peopleInGroup = 0,
-      backgroundColor = getRandomRgbColor();
+      backgroundColor = getRandomRgbColor(),
+      jsonBuilder = new JSONBuilder();
 
   var shuffledStudents = _.shuffle(filteredStudents),
       ungroupedStudents = shuffledStudents.length % groupSize;
@@ -34,6 +35,7 @@ function groupStudents() {
   if (ungroupedStudents === 0 || ungroupedStudents > groupSize / 2) {
 
     $(shuffledStudents).each(function() {
+      jsonBuilder.addData('Team ' + teamCounter, $(this).data('name'));
       appendCloneToModal($(this));
       peopleInGroup += 1;
 
@@ -46,6 +48,7 @@ function groupStudents() {
 
     var offset = 1;
     $(shuffledStudents).each(function() {
+      jsonBuilder.addData('Team ' + teamCounter, $(this).data('name'));
       appendCloneToModal($(this));
       peopleInGroup += 1;
 
@@ -61,6 +64,11 @@ function groupStudents() {
 
   }
 
+  $downloadBtn.on('click', function() {
+
+  });
+
   $modal.append('<a class="close-reveal-modal">&#215;</a>');
   $modal.foundation('reveal', 'open');
+  console.log(jsonBuilder.getData());
 }
