@@ -10,20 +10,27 @@
 </head>
 <body>
 	<div id="wrapper">
-		<div class="sticky" id="filter-menu">
+		<div id="filter-menu">
 			<select id="course-select">
-				<option disabled selected>Choose course</option>
+				<option value="0" disabled selected>Choose course</option>
 				<option value="Frontend JavaScript">Frontend JavaScript</option>
 				<option value="Core Java">Core Java</option>
 			</select>
 			<select id="time-select">
-				<option disabled selected>Choose group</option>
+				<option value="0" disabled selected>Choose group</option>
 				<option value="1">Afternoon</option>
 				<option value="2">Evening</option>
 			</select>
 			<button id="filter-btn">Filter</button>
 			<button id="show-all-btn">Show all</button>
-			<p class="error-message"><small class="error">*Both options must be selected.</small></p>
+			<p class="error-message">
+				<small class="error">*Both options must be selected.</small>
+			</p>
+			<p class="group-menu">
+				<span>People in group</span>
+				<input type="number" min="2" max="5" value="2">
+				<button id="group-btn">Group</button>
+			</p>
 		</div>
 
 		<div id="students"></div>
@@ -37,7 +44,7 @@
 			</div>
 			<div class="column small-3 git">
 				{{#if github}}
-				<p><a href="{{github}}">GitHub</a></p>
+				<p><a href="{{github}}" target="_blank">GitHub</a></p>
 				{{else}}
 				<p class="red">No Git</p>
 				{{/if}}

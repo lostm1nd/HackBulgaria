@@ -13,6 +13,7 @@
 
       $('#filter-btn').on('click', filterStudents);
       $('#show-all-btn').on('click', showAllStudents);
+      $('#group-btn').on('click', groupStudents);
 
       $('#wrapper').on('mouseenter', '.row', function() {
         $(this).toggleClass('hovered-row');
@@ -83,6 +84,7 @@
         return st.name;
       }));
 
+      $('#filter-menu').find('.group-menu').show();
     }
 
     function filteringCriteria(student) {
@@ -103,17 +105,21 @@
       var $row = $(this);
 
       if (studentsNames.indexOf($row.data('name')) === -1) {
-        $row.hide();
+        $row.removeClass('selected').hide();
       } else {
-        $row.show();
+        $row.addClass('selected').show();
       }
 
     });
   }
 
   function showAllStudents() {
+    $('#course-select').val(0);
+     $('#time-select').val(0);
+     $('#filter-menu').find('.group-menu').hide();
+
     $STUDENTS_IN_DOM.each(function() {
-      $(this).show();
+      $(this).removeClass('selected').show();
     });
   }
 

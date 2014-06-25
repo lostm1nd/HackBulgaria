@@ -5,6 +5,11 @@
 	background-color: #eee;
 }
 
+.red {
+	color: #f00;
+}
+
+/*FILTER MENU STYLING START*/
 #filter-menu {
 	text-align: center;
 	background-color: #666;
@@ -28,15 +33,30 @@
 	margin: 0;
 	margin-left: 1%;
 }
+
 #filter-menu .error-message {
 	display: none;
 	margin: 15px -15px 0 -15px;	
 }
 
-.red {
-	color: #f00;
+#filter-menu .group-menu {
+	display: none;
+	margin: 15px 0 0 0;
 }
 
+#filter-menu .group-menu span {
+	color: #fff;
+	font-size: 1.3rem;
+}
+
+#filter-menu .group-menu input {
+	display: inline-block;
+	width: 40%;
+	margin: 0;
+}
+/*FILTER MENU STYLING END*/
+
+/*ROW STYLING START*/
 .row {
 	text-align: center;
 	padding-top: 1.5%;
@@ -70,7 +90,9 @@
 .hovered-row {
 	background-color: rgba(255, 100, 15, 0.35);
 }
+/*ROW STYLING END*/
 
+/*MEDIA QUERIES START*/
 @media only screen and (max-width: 960px) {
 	#filter-menu select {
 		width: 45%;
@@ -88,3 +110,4 @@
 		width: 100%;
 	}
 }
+/*ROW STYLING END*/
