@@ -64,10 +64,6 @@ function groupStudents() {
 
   }
 
-  $downloadBtn.on('click', function() {
-
-  });
-
   $modal.append('<a class="close-reveal-modal">&#215;</a>');
   $modal.foundation('reveal', 'open');
   console.log(jsonBuilder.getData());
