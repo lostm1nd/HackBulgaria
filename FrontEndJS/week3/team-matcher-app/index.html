@@ -13,8 +13,8 @@
 		<div class="sticky" id="filter-menu">
 			<select id="course-select">
 				<option disabled selected>Choose course</option>
-				<option value="js">Frontend JavaScript</option>
-				<option value="java">Core Java</option>
+				<option value="Frontend JavaScript">Frontend JavaScript</option>
+				<option value="Core Java">Core Java</option>
 			</select>
 			<select id="time-select">
 				<option disabled selected>Choose group</option>
@@ -44,7 +44,7 @@
 			</div>
 			<div class="column small-3 courses">
 			{{#each courses}}
-				<p>{{name}} <span>{{group}}</span></p>
+				<p>{{name}}, <span>group {{group}}</span></p>
 			{{/each}}
 			</div>
 			<div class="column small-3 available">

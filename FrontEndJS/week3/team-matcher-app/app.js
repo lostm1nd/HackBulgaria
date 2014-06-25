@@ -25,90 +25,71 @@
   });
 
   function displayStudents(students) {
-
-    students.sort(sortByAvailability);
-    students.sort(sortByCourseName);
-    students.sort(sortByStudentName);
+    students = students.filter(filterEmptyRecords);
+    students.sort(sortingCriteria);
 
     var source = $('#student-template').html(),
-        template = Handlebars.compile(source),
-        html = template({students: students});
+      template = Handlebars.compile(source),
+      html = template({
+        students: students
+      });
 
     $('#students').append(html);
   }
 
-  function sortByAvailability(student, otherStudent) {
+  function filterEmptyRecords(record) {
+    if (record.name !== '' && record.courses.length > 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  function sortingCriteria(student, otherStudent) {
+    var studentCourse = student.courses[0].name + student.courses[0].group,
+        otherStudentCourse = otherStudent.courses[0].name + otherStudent.courses[0].group;
+
     if (student.available && !otherStudent.available) {
       return -1;
     } else if (!student.available && otherStudent.available) {
+      return 1;
+    } else if (studentCourse < otherStudentCourse) {
+      return -1;
+    } else if (studentCourse > otherStudentCourse) {
+      return 1;
+    } else if (student.name < otherStudent.name) {
+      return -1;
+    } else if (student.name > otherStudent.name) {
       return 1;
     } else {
       return 0;
     }
   }
 
-  function sortByCourseName(student, otherStudent) {
-    if (student.courses.length > 0 && otherStudent.courses.length > 0) {
-      if (student.courses[0].name < otherStudent.courses[0].name) {
-        return -1;
-      } else if (student.courses[0].name > otherStudent.courses[0].name) {
-        return 1;
-      } else {
-        return 0;
-      }
-    }
-  }
-
-  function sortByStudentName(student, otherStudent) {
-    if (student.name && otherStudent.name) {
-      if (student.name < otherStudent.name) {
-        return -1;
-      } else if (student.name > otherStudent.name) {
-        return 1;
-      } else {
-        return 0;
-      }
-    }
-  }
-
   function filterStudents() {
-
     var selectedCourse = $('#course-select').val(),
-        selectedTime = $('#time-select').val();
+        selectedTime = $('#time-select').val(),
+        filtered;
 
     $('#filter-menu').find('.error-message').hide();
 
     if (selectedCourse === null || selectedTime === null) {
       $('#filter-menu').find('.error-message').show();
+
     } else {
-      var byCourse = STUDENTS.filter(filterByCourse);
-      var byTime = byCourse.filter(filterByTime);
-      toggleStudentVisibility(byTime.map(function(st){
+      filtered = STUDENTS.filter(filteringCriteria);
+
+      toggleStudentVisibility(filtered.map(function(st) {
         return st.name;
       }));
+
     }
 
-    function filterByCourse(student) {
-      var isQualified = false,
-          courseName = (selectedCourse === 'js') ?
-                    'Frontend JavaScript' :
-                    'Core Java';
+    function filteringCriteria(student) {
+      var isQualified = false;
 
       student.courses.forEach(function(course) {
-        if (course.name === courseName) {
-          isQualified = true;
-        }
-      });
-
-      return isQualified;
-    }
-
-    function filterByTime(student) {
-      var isQualified = false,
-          time = parseInt(selectedTime, 10);
-
-      student.courses.forEach(function(course) {
-        if (course.group === time) {
+        if (course.name + course.group === selectedCourse + selectedTime) {
           isQualified = true;
         }
       });
@@ -117,14 +98,16 @@
     }
   }
 
-  function toggleStudentVisibility(filtered) {
+  function toggleStudentVisibility(studentsNames) {
     $STUDENTS_IN_DOM.each(function() {
       var $row = $(this);
-      if (filtered.indexOf($row.data('name')) === -1) {
+
+      if (studentsNames.indexOf($row.data('name')) === -1) {
         $row.hide();
       } else {
         $row.show();
       }
+
     });
   }
 
