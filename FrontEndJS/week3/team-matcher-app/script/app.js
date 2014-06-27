@@ -25,7 +25,7 @@ $(document).ready(function() {
       GROUPING_MODULE.groupStudents();
     });
 
-    $('#wrapper').on('mouseenter', '.row', function() {
+    $('#students').on('mouseenter', '.row', function() {
       $(this).toggleClass('hovered-row');
     }).on('mouseleave', '.row', function() {
       $(this).toggleClass('hovered-row');
