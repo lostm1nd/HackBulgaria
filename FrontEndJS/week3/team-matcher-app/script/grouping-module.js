@@ -1,7 +1,8 @@
 var GROUPING_MODULE = (function() {
   'use strict';
 
-  var $studentsContainer = $('#students'),
+  var $closeModalBtn = $('<a>').addClass('close-reveal-modal').html('&#215;'),
+      $studentsContainer = $('#students'),
       $filterMenu = $('#filter-menu'),
       $modal = $('#grouped-students-modal'),
       $teamSpan = $('<span>').addClass('team'),
@@ -27,8 +28,8 @@ var GROUPING_MODULE = (function() {
   function groupStudents() {
     $modal.empty();
 
-    var filteredStudents = $studentsContainer.find('.row.selected');
-      // .find('.available').find('input:checked').parent('.row');
+    var filteredStudents = $studentsContainer.find('.row.selected')
+      .find('.available').find('input:checked').parents('.row');
 
     var jsonBuilder = new JSONBuilder(),
         groupSize = $filterMenu.find('.group-menu').find('input').val(),
@@ -73,7 +74,7 @@ var GROUPING_MODULE = (function() {
 
     }
 
-    $modal.append('<a class="close-reveal-modal">&#215;</a>');
+    $modal.append($closeModalBtn);
     $modal.foundation('reveal', 'open');
     console.log(jsonBuilder.getData());
   }
