@@ -1,7 +1,9 @@
 var GROUPING_MODULE = (function() {
   'use strict';
 
-  var $modal = $('#grouped-students-modal'),
+  var $studentsContainer = $('#students'),
+      $filterMenu = $('#filter-menu'),
+      $modal = $('#grouped-students-modal'),
       $teamSpan = $('<span>').addClass('team'),
       backgroundColor,
       peopleInGroup,
@@ -25,22 +27,19 @@ var GROUPING_MODULE = (function() {
   function groupStudents() {
     $modal.empty();
 
-    var filteredStudents = $('#students').find('.row.selected');
+    var filteredStudents = $studentsContainer.find('.row.selected');
       // .find('.available').find('input:checked').parent('.row');
 
-    var groupSize = $('#filter-menu').find('.group-menu').find('input').val();
+    var jsonBuilder = new JSONBuilder(),
+        groupSize = $filterMenu.find('.group-menu').find('input').val(),
+        shuffledStudents = _.shuffle(filteredStudents),
+        ungroupedStudents = shuffledStudents.length % groupSize;
 
     groupSize = parseInt(groupSize, 10);
-
-    var jsonBuilder = new JSONBuilder();
 
     teamCounter = 1;
     peopleInGroup = 0;
     backgroundColor = UTILS.getRandomRgbColor();
-
-
-    var shuffledStudents = _.shuffle(filteredStudents),
-        ungroupedStudents = shuffledStudents.length % groupSize;
 
     if (ungroupedStudents === 0 || ungroupedStudents > groupSize / 2) {
 
@@ -84,5 +83,3 @@ var GROUPING_MODULE = (function() {
   };
 
 }());
-
-

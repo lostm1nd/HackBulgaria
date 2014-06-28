@@ -1,7 +1,10 @@
 var DISPLAY_MODULE = (function() {
   'use strict';
 
-  var $STUDENTS_IN_DOM;
+  var $filterMenu = $('#filter-menu'),
+      $courseSelect = $('#course-select'),
+      $timeSelect = $('#time-select'),
+      $STUDENTS_IN_DOM;
 
   function displayStudents(students) {
     students = students.filter(FILTER_MODULE.filterEmptyRecords);
@@ -30,11 +33,11 @@ var DISPLAY_MODULE = (function() {
   }
 
   function showAllStudents() {
-    $('#course-select').val(0);
-    $('#time-select').val(0);
-    $('#filter-menu').find('.group-menu').hide();
-    $('#filter-menu').find('.error-message.no-options').hide();
-    $('#filter-menu').find('.error-message.no-available').hide();
+    $courseSelect.val(0);
+    $timeSelect.val(0);
+    $filterMenu.find('.group-menu').hide();
+    $filterMenu.find('.error-message.no-options').hide();
+    $filterMenu.find('.error-message.no-available').hide();
 
     $STUDENTS_IN_DOM.each(function() {
       $(this).removeClass('selected').show();

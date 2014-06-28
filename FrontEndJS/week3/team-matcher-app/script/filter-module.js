@@ -1,7 +1,10 @@
 var FILTER_MODULE = (function() {
   'use strict';
 
-  var selectedCourse,
+  var $filterMenu = $('#filter-menu'),
+      $courseSelect = $('#course-select'),
+      $timeSelect = $('#time-select'),
+      selectedCourse,
       selectedTime;
 
   function filterEmptyRecords(record) {
@@ -12,21 +15,21 @@ var FILTER_MODULE = (function() {
   }
 
   function filterStudents(students) {
-    selectedCourse = $('#course-select').val();
-    selectedTime = $('#time-select').val();
+    selectedCourse = $courseSelect.val();
+    selectedTime = $timeSelect.val();
 
-    $('#filter-menu').find('.error-message.no-options').hide();
-    $('#filter-menu').find('.error-message.no-available').hide();
+    $filterMenu.find('.error-message.no-options').hide();
+    $filterMenu.find('.error-message.no-available').hide();
 
     if (selectedCourse === null || selectedTime === null) {
-      $('#filter-menu').find('.error-message.no-options').show();
+      $filterMenu.find('.error-message.no-options').show();
     } else {
       var filtered = students.filter(filteringCriteria).map(function(st) {
         return st.name;
       });
 
       DISPLAY_MODULE.toggleStudentVisibility(filtered);
-      $('#filter-menu').find('.group-menu').show();
+      $filterMenu.find('.group-menu').show();
     }
   }
 
