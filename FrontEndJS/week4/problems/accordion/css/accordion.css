@@ -1,0 +1,42 @@
+#site-wrap {
+  background-color: lightblue;
+  width: 50%;
+  margin: 0 auto;
+  padding: 10px 20px;
+}
+
+.accordion {
+  margin: 50px;
+}
+
+.accordion dt {
+  background-color: orange;
+}
+
+.accordion dt, .accordion dd {
+  padding: 10px;
+  border: 1px solid black;
+  border-bottom: 0;
+}
+
+.accordion dt:last-of-type, .accordion dd:last-of-type {
+  border-bottom: 1px solid black;
+}
+
+.accordion dt a, .accordion dd a {
+  display: block;
+  color: black;
+  font-weight: bold;
+}
+
+.accordion dd {
+  background-color: #eee;
+  border-top: 0;
+  font-size: 12px;
+}
+
+.accordion dd:last-of-type {
+  border-top: 1px solid white;
+  position: relative;
+  top: -1px;
+}

@@ -1,0 +1,7 @@
+.gallery  {
+    margin-top: 20px;
+}
+
+.gallery img {
+	max-width: 100%;
+}
