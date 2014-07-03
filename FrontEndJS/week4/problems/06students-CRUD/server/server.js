@@ -14,6 +14,12 @@ var Student = mongoose.model("Student", {
   courses: [String]
 });
 
+app.all("*", function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", ["X-Requested-With", "Content-Type"]);
+  next();
+});
+
 app.use(bodyParser.json());
 
 // lists all students
@@ -25,8 +31,19 @@ app.get("/students", function(req, res) {
 
 // lists an individual student
 app.get("/student/:facultyNumber", function(req, res) {
-  Student.find({ facultyNumber: req.params.facultyNumber || ""}, function(err, student) {
-    return res.json(student);
+  Student.findOne({ facultyNumber: req.params.facultyNumber || ""}, function(err, student) {
+
+    console.log(student);
+    if(student === null) {
+      console.log("Not found")
+      res.status(404);
+      res.json({
+        "error": "student_not_found"
+      });
+    } else {
+      return res.json(student);
+    }
+
   });
 });
 

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Students CRUD App</title>
+	<link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div class="container">
+		<header class="row">
+			<h1 class="col-xs-12">Students System</h1>
+		</header>
+		<section class="row">
+			<article class="col-xs-4 add-update-student">
+				<h2>Add/Update Student</h2>
+				<section class="options">
+					<p><label>
+						<span>First name:</span><input type="text" class="first-name">
+					</label></p>
+					<p><label>
+						<span>Last name:</span><input type="text" class="last-name">
+					</label></p>
+					<p><label>
+						<span>Fac. number:</span><input type="text"  class="fac-num">
+					</label></p>
+					<p><label>
+						<span>Courses (comma separated):</span><input type="text" class="courses">
+					</label></p>
+					<p class="btn-holder"><button class="btn">Add/Update</button></p>
+				</section>
+			</article>
+			<article class="col-xs-4 delete-student">
+				<h2>Delete Student</h2>
+				<section class="options">
+					<p><label>
+						<span>Fac. number of student to delete:</span><input type="text">
+					</label></p>
+					<p class="btn-holder"><button class="btn">Delete</button></p>
+				</section>
+			</article>
+			<article class="col-xs-4 list-student">
+				<h2>List Students</h2>
+				<section class="options">
+					<p><label>
+						<span>How many to list:</span><input type="text">
+					</label></p>
+					<p class="btn-holder">
+						<button class="btn">List</button> or 
+						<button class="btn">List All</button>
+					</p>
+				</section>
+			</article>
+		</section>
+	</div>
+	
+	<script src="../../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

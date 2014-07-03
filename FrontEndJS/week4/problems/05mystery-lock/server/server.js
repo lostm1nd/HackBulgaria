@@ -69,4 +69,3 @@ app.post("/unlock", function(req, res) {
 
 console.log("App is listening at http://localhost:" + PORT);
 app.listen(PORT);
-

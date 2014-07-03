@@ -1,0 +1,38 @@
+header {
+	background-color: #eee;
+	text-align: center;
+}
+
+.row article h2 {
+	text-align: center;
+	background-color: orange;
+	padding: 8px;
+}
+
+.row article h2:hover {
+	cursor: pointer;
+}
+
+.row article .options {
+	display: none;
+}
+
+.row article label {
+	display: block;
+	width: 100%;
+}
+
+.row article label span {
+	display: inline-block;
+	width: 40%;
+}
+
+.row article label input {
+	display: inline-block;
+	width: 58%;
+	margin-left: 2%;
+}
+
+.row article .btn-holder {
+	text-align: center;
+}
