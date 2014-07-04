@@ -36,3 +36,17 @@ header {
 .row article .btn-holder {
 	text-align: center;
 }
+
+#students-container {
+	display: none;
+	text-align: center;
+}
+
+#students-container .row {
+	padding: 4px;
+}
+
+#students-container button.save,
+#students-container input.on-edit {
+	display: none;
+}

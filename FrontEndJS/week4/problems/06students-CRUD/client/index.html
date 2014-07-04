@@ -9,11 +9,11 @@
 <body>
 	<div class="container">
 		<header class="row">
-			<h1 class="col-xs-12">Students System</h1>
+			<h1 class="col-xs-12">Hack's Students System</h1>
 		</header>
-		<section class="row">
-			<article class="col-xs-4 add-update-student">
-				<h2>Add/Update Student</h2>
+		<section id="main-menu" class="row">
+			<article class="col-xs-4 add-student">
+				<h2>Add Student</h2>
 				<section class="options">
 					<p><label>
 						<span>First name:</span><input type="text" class="first-name">
@@ -22,12 +22,12 @@
 						<span>Last name:</span><input type="text" class="last-name">
 					</label></p>
 					<p><label>
-						<span>Fac. number:</span><input type="text"  class="fac-num">
+						<span>Fac. number:</span><input type="text" class="fac-num">
 					</label></p>
 					<p><label>
 						<span>Courses (comma separated):</span><input type="text" class="courses">
 					</label></p>
-					<p class="btn-holder"><button class="btn">Add/Update</button></p>
+					<p class="btn-holder"><button class="btn">Add</button></p>
 				</section>
 			</article>
 			<article class="col-xs-4 delete-student">
@@ -36,12 +36,12 @@
 					<p><label>
 						<span>Fac. number of student to delete:</span><input type="text">
 					</label></p>
-					<p class="btn-holder"><button class="btn">Delete</button></p>
+					<p class="btn-holder"><button class="btn delete">Delete</button></p>
 				</section>
 			</article>
 			<article class="col-xs-4 list-student">
 				<h2>List Students</h2>
-				<section class="options">
+				<!-- <section class="options">
 					<p><label>
 						<span>How many to list:</span><input type="text">
 					</label></p>
@@ -49,11 +49,41 @@
 						<button class="btn">List</button> or 
 						<button class="btn">List All</button>
 					</p>
-				</section>
+				</section> -->
 			</article>
+		</section>
+		<section id="students-container">
+			<header class="row">
+				<p class="col-xs-3">Faculty Number</p>
+				<p class="col-xs-3">Name</p>
+				<p class="col-xs-3">Courses</p>
+				<p class="col-xs-3">Controls</p>
+			</header>
 		</section>
 	</div>
 	
+	<script id="student-template" type="text/x-handlebars-template">
+		{{#students}}
+		<article class="row" data-facultyNum="{{facultyNumber}}">
+			<p class="col-xs-3 faculty-num">{{facultyNumber}}</p>
+			<p class="col-xs-3">
+				<span class="name on-save">{{name}}</span>
+				<input type="text" class="name on-edit">
+			</p>
+			<p class="col-xs-3">
+				<span class="courses on-save">{{courses}}</span>
+				<input type="text" class="courses on-edit">
+			</p>
+			<p class="col-xs-3">
+				<button class="btn edit">Edit</button>
+				<button class="btn save">Save</button>
+				<button class="btn delete">Delete</button>
+			</p>
+		</article>
+		{{/students}}
+	</script>
+	
+	<script src="../../bower_components/handlebars/handlebars.min.js"></script>
 	<script src="../../bower_components/jquery/dist/jquery.js"></script>
     <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="app.js"></script>
