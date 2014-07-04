@@ -19,7 +19,7 @@ $(document).ready(function() {
         facNumber = $options.find('.fac-num').val(),
         courses = $options.find('.courses').val();
 
-    courses = courses.split(',').join(' ').split(' ').filter(String);
+    courses = courses.split(',').map(function(token) { return token.trim(); });
 
     var data = {
       name: firstName + ' ' + lastName,
@@ -55,6 +55,9 @@ $(document).ready(function() {
 
         $studentsContainer.find('header').nextAll().remove();
         $studentsContainer.append(html).show();
+      },
+      error: function() {
+        alert('Something is terribly wrong with the server. Try later.');
       }
     });
   });
