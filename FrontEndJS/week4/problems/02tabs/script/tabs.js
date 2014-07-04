@@ -1,49 +1,30 @@
-var Tabs = (function($) {
+(function() {
   'use strict';
 
-  var $tabsContainer,
-      $tabsAnchors,
-      $tabsContent;
+  $.fn.tabs = function() {
+    var $tabs = this,
+        $tabsAnchors = this.find('a'),
+        $tabsContent = this.find('.tabs-content');
 
-  function Tabs(selector) {
-    if(!(this instanceof Tabs)) {
-      return new Tabs(selector);
-    }
+    // Add click event listener for changing
+    // the current tab based on the anchor href attribute
+    $tabsAnchors.on('click', function() {
+      $tabsContent.hide();
+      setActiveAnchor($tabs, $(this));
+      showTab($tabs, $(this).attr('href'));
+    });
 
-    $tabsContainer = $(selector);
-    $tabsAnchors = $(selector).find('a');
-    $tabsContent = $(selector).find('.tabs-content');
-  }
-
-  Tabs.prototype.init = function init() {
-    hideAllTabs();
-    setAsActive($tabsAnchors.first());
-    showTab($tabsAnchors.first().attr('href'));
+    // Show the first tab
+    $tabsAnchors.first().trigger('click');
   };
 
-  Tabs.prototype.changeOn = function changeOn(eventType) {
-    $tabsAnchors.on(eventType, changeTab);
-  };
-
-  function changeTab() {
-    hideAllTabs();
-    setAsActive($(this));
-    showTab($(this).attr('href'));
-  }
-
-  function hideAllTabs() {
-    $tabsContent.hide();
-  }
-
-  function setAsActive($anchor) {
-    $tabsContainer.find('.active').removeClass('active');
+  function setActiveAnchor($container, $anchor) {
+    $container.find('.active').removeClass('active');
     $anchor.addClass('active');
   }
 
-  function showTab(tabID) {
-    $tabsContainer.find(tabID).show();
+  function showTab($container, tabID) {
+    $container.find(tabID).show();
   }
-
-  return Tabs;
 
 }(jQuery));

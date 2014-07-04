@@ -13,14 +13,6 @@ var ImageSearch = (function() {
     imageSearch.setSearchCompleteCallback(null, onSearchComplete, null);
   }
 
-  function search(query) {
-    if (isContainerProvided) {
-      imageSearch.execute(query);
-    } else {
-      throw new Error('A container must be provided where the search results will be appended.');
-    }
-  }
-
   function onSearchComplete() {
     if (imageSearch.results && imageSearch.results.length > 0) {
       imageSearch.results.forEach(function(result) {
@@ -30,6 +22,14 @@ var ImageSearch = (function() {
       });
 
       formatFuncCallback();
+    }
+  }
+
+  function search(query) {
+    if (isContainerProvided) {
+      imageSearch.execute(query);
+    } else {
+      throw new Error('A container must be provided where the search results will be appended.');
     }
   }
 

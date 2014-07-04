@@ -1,7 +1,7 @@
 $(document).ready(function() {
   'use strict';
 
-  var tabs = new Tabs('#tabs-container');
-  tabs.init();
-  tabs.changeOn('click');
+  // Implemented the tabs functionality
+  // as a jQuery pluging.
+  $('#tabs-container').tabs();
 });

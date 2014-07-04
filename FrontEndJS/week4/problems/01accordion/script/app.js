@@ -1,7 +1,7 @@
 $(document).ready(function() {
   'use strict';
 
-  var accordion = new Accordion('dl.accordion');
-  accordion.init();
-  accordion.expandOn('click');
+  // Implemented the accordion functionality
+  // as a jQuery pluging.
+  $('dl.accordion').accordion();
 });
