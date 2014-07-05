@@ -1,14 +1,16 @@
+/* globals require */
+
 $(document).ready(function() {
   'use strict';
 
   require.config({
     paths: {
       'display': 'modules/display-module',
-      'filter': 'modules/filter-module',
       'group': 'modules/grouping-module',
       'sort': 'modules/sorting-module',
       'json': 'modules/json-builder',
-      'utils': 'modules/utils'
+      'utils': 'modules/utils',
+      'filter': 'modules/filter-module'
     }
   });
 
@@ -42,7 +44,7 @@ $(document).ready(function() {
       displayModule.displayStudents(students);
 
       $('#filter-btn').on('click', function() {
-        filterModule.filterStudents(students);
+        filterModule.filterStudents(students, displayModule);
       });
 
       // Set the display of all students from none back to normal.

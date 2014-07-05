@@ -40,7 +40,7 @@ define(['utils', 'json'], function(utils, jsonModule) {
 
     teamCounter = 1;
     peopleInGroup = 0;
-    backgroundColor = UTILS.getRandomRgbColor();
+    backgroundColor = utils.getRandomRgbColor();
 
     if (ungroupedStudents === 0 || ungroupedStudents > groupSize / 2) {
 

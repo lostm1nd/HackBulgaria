@@ -1,4 +1,4 @@
-define(['display'], function(displayModule) {
+define(function() {
   'use strict';
 
   var $filterMenu = $('#filter-menu'),
@@ -14,7 +14,7 @@ define(['display'], function(displayModule) {
     return false;
   }
 
-  function filterStudents(students) {
+  function filterStudents(students, displayModule) {
     selectedCourse = $courseSelect.val();
     selectedTime = $timeSelect.val();
 
