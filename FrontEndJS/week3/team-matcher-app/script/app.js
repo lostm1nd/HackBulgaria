@@ -14,7 +14,30 @@ $(document).ready(function() {
 
   require(['display', 'filter', 'group'], function(displayModule, filterModule, groupModule) {
 
+    function populateCourseOptions(students) {
+      var templateSource = $('#course-option-template').html(),
+          template = Handlebars.compile(templateSource),
+          allCourses = [];
+
+      students.forEach(function(student) {
+        var studentCourses = student.courses;
+
+        studentCourses.forEach(function(course) {
+          if (allCourses.indexOf(course.name) === -1) {
+            allCourses.push(course.name);
+          }
+        });
+      });
+
+      allCourses.sort();
+      $('#course-select').append(template({
+        courses: allCourses
+      }));
+    }
+
     $.getJSON('https://hackbulgaria.com/api/students/', function(students) {
+
+      populateCourseOptions(students);
 
       displayModule.displayStudents(students);
 

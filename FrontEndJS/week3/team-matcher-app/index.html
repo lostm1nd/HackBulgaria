@@ -13,9 +13,6 @@
 		<div id="filter-menu">
 			<select id="course-select">
 				<option value="0" disabled selected>Choose course</option>
-				<option value="Angular JS">Angular JS</option>
-				<option value="Core Java">Core Java</option>
-				<option value="Frontend JavaScript">Frontend JavaScript</option>				
 			</select>
 			<select id="time-select">
 				<option value="0" disabled selected>Choose group</option>
@@ -65,6 +62,12 @@
 				<p><input type="checkbox" {{#if available}}checked{{/if}}></p>
 			</div>
 		</div>
+		{{/each}}
+	</script>
+
+	<script type="x-handlebars-template" id="course-option-template">
+		{{#each courses}}
+			<option value="{{this}}">{{this}}</option>
 		{{/each}}
 	</script>
 	
