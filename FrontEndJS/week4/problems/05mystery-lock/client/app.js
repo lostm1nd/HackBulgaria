@@ -51,7 +51,7 @@ $(document).ready(function() {
 
     setTimeout(function() {
       rotateCircle($elements);
-    }, 60);
+    }, 40);
   }
 
   function enableButton(index) {
@@ -84,16 +84,14 @@ $(document).ready(function() {
     $.ajax({
       type: 'GET',
       url: 'http://localhost:3000/secret/' + token,
-      dataType: 'json',
-      success: function(response) {
+      dataType: 'json'
+    }).done(function(response) {
         concatenatedSecrets += response.secret;
         disableButton(index);
         enableButton(index + 1);
-      },
-      error: function() {
+      }).fail(function() {
         alert('Server not responding. Try later.');
-      }
-    });
+      });
   });
 
   $('.unlock').on('click', function() {
