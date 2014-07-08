@@ -106,6 +106,8 @@ $(document).ready(function() {
         name = $parent.find('input.name.on-edit').hide().val(),
         courses = $parent.find('input.courses.on-edit').hide().val();
 
+    courses = courses.split(',').map(function(token) { return token.trim(); });
+
     var updateData = {
       name: name,
       facultyNumber: facultyNumber,
