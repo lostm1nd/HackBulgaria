@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Todo list with HTML5 and JS">
+	<meta name="author" content="Deyan Yanakiev">
+	<title>TODO List</title>
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+	<div class="container">
+		<button class="btn btn-primary btn-lg"
+		data-toggle="modal"
+		data-target="#form-modal">
+			Add a new task
+		</button>
+
+		<button class="btn btn-primary btn-lg" id="get-tasks">
+			List tasks
+		</button>
+
+		<div class="row" id="tasks-container"></div>
+	</div>
+
+	<div class="modal fade" id="form-modal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title">Add a new task</h4>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+				<label>
+					<span>Title</span>
+					<input type="text" name="title">
+				</label>
+				<label>
+					<span>Deadline</span>
+					<input type="date" name="deadline">
+				</label>
+				<label>
+					<span>Description</span>
+					<textarea name="description"></textarea>
+				</label>
+				<label>
+					<span>Starred</span>
+					<input type="checkbox" name="starred">
+				</label>
+			</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-task">Save task</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<script id="task-template" type="text/x-handlebars-template">
+		<div class="row" id="table-header">
+			<div class="col-xs-3">Title</div>
+			<div class="col-xs-3">Deadline</div>
+			<div class="col-xs-3">Status</div>
+			<div class="col-xs-3">Options</div>
+		</div>
+		{{#each tasks}}
+		<div class="row">
+			<div class="col-xs-3">{{title}}</div>
+			<div class="col-xs-3">{{deadline}}</div>
+			<div class="col-xs-3">{{#if starred}}Important{{else}}Normal{{/if}}</div>
+			<div class="col-xs-3">
+				<button class="btn" data-toggle="modal" data-target="#{{@index}}-modal">
+					More Info
+				</button>
+				<button class="btn">Did it!</button>
+			</div>
+			<div class="modal fade" id="{{@index}}-modal">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			        <h4 class="modal-title">Task Description</h4>
+			      </div>
+			      <div class="modal-body">
+			      	{{description}}
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		{{/each}}
+	</script>
+
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="bower_components/handlebars/handlebars.min.js"></script>
+	<script src="script/app.js"></script>
+</body>
+</html>
