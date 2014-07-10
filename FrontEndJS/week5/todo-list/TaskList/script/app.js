@@ -3,42 +3,75 @@
 $(document).ready(function() {
   'use strict';
 
-  $(document).on('click', '#save-task', function() {
-    var $form = $(this).closest('#form-modal').find('form'),
+  var taskTemplate = Handlebars.compile($('#task-template').html()),
+      $taskContainer = $('#all-tasks').find('ul'),
+      $taskForm = $('#new-task'),
+      $optionsForm = $('#new-options'),
+      $toggleTaskVisibility = $('#toggle-tasks');
+
+  function saveTaskToLocalStorage() {
+    var $form = $('#new-task'),
         taskTitle = $form.find('input[name="title"]').val(),
         taskDeadline = $form.find('input[name="deadline"]').val(),
         taskDescription = $form.find('textarea').val(),
-        starred = $form.find('input[name="starred"]').is(':checked');
+        isImportant = $form.find('input[name="starred"]').is(':checked');
 
-    var taskObject = {
-        title: taskTitle,
-        deadline: taskDeadline,
-        description: taskDescription,
-        starred: starred
-    };
+    var newTask = TaskModule.saveTaskToLocalStorage(taskTitle, taskDeadline, taskDescription, isImportant);
+    TaskModule.addTasksToList(newTask, taskTemplate, $taskContainer);
+  }
 
-    window.localStorage.setItem(taskTitle, JSON.stringify(taskObject));
-  });
+  function saveOptionsToLocalStorage() {
+    var $form = $('#new-options'),
+        userName = $form.find('input[name="username"]').val(),
+        avatar = $form.find('input[name="avatar"]')[0].files,
+        bgColor = $form.find('input[name="background"]').val(),
+        fileReader;
 
-  $('#get-tasks').on('click', function() {
-    var tasksLength = window.localStorage.length,
-        index = 0,
-        tasks = [],
-        item;
-
-    while (index < tasksLength) {
-      item = window.localStorage.getItem(window.localStorage.key(index));
-      tasks.push(JSON.parse(item));
-      index += 1;
+    if (userName) {
+      UserModule.saveUsername(userName);
     }
 
-    var template = Handlebars.compile($('#task-template').html()),
-        html = template({
-          tasks: tasks
-        });
+    if (avatar.length > 0) {
+      fileReader = new FileReader();
+      fileReader.readAsDataURL(avatar[0]);
 
-    $('#tasks-container').append(html);
+      fileReader.onload = function(fileLoadedEvent) {
+        var srcData = fileLoadedEvent.target.result;
+        UserModule.saveAvatar(srcData);
+      };
+    }
 
+    if (bgColor) {
+      UserModule.saveBackground(bgColor);
+    }
+  }
+
+  // Attach event handlers
+  $toggleTaskVisibility.on('click', function() {
+    if ($(this).attr('data-state') === 'hidden') {
+      $('#all-tasks').removeClass('hidden');
+      $(this).attr('data-state', 'showing');
+      $(this).text('Hide tasks');
+    } else {
+      $('#all-tasks').addClass('hidden');
+      $(this).attr('data-state', 'hidden');
+      $(this).text('Show tasks');
+    }
   });
 
+  $taskForm.on('click', 'input[type="submit"]', saveTaskToLocalStorage);
+
+  $taskContainer.on('click', 'a.remove-task', function() {
+    var $parentLI = $(this).closest('li'),
+        taskTitle = $parentLI.find('span.title').text();
+
+    TaskModule.removeTaskFromLocalStorage(taskTitle);
+    $parentLI.remove();
+  });
+
+  $optionsForm.on('click', 'button', saveOptionsToLocalStorage);
+
+  // Initialize page
+  UserModule.loadUser(taskTemplate, $taskContainer);
+  $taskContainer.sortable({items: 'li:nth-child(n+2)'});
 });
