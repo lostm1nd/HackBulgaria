@@ -1,4 +1,4 @@
-var UserModule = (function() {
+var UserModule = (function(localStorage) {
   'use strict';
 
   // Hidden variables and functions
@@ -20,10 +20,10 @@ var UserModule = (function() {
 
   // Exposed functions
   function loadUser(taskTemplate, $taskContainer) {
-    var tasks = JSON.parse(window.localStorage.getItem('SavedTasks')),
-        username = window.localStorage.getItem('Username'),
-        avatar = window.localStorage.getItem('Avatar'),
-        background = window.localStorage.getItem('Background');
+    var tasks = JSON.parse(localStorage.getItem('SavedTasks')),
+        username = localStorage.getItem('Username'),
+        avatar = localStorage.getItem('Avatar'),
+        background = localStorage.getItem('Background');
 
     if (tasks) {
       tasks.forEach(function(task) {
@@ -45,17 +45,17 @@ var UserModule = (function() {
   }
 
   function saveUsername(name) {
-    window.localStorage.setItem('Username', name);
+    localStorage.setItem('Username', name);
     updateGreeting(name);
   }
 
   function saveAvatar(dataString) {
-    window.localStorage.setItem('Avatar', dataString);
+    localStorage.setItem('Avatar', dataString);
     updateAvatar(dataString);
   }
 
   function saveBackground(color) {
-    window.localStorage.setItem('Background', color);
+    localStorage.setItem('Background', color);
     updateBackground(color);
   }
 
@@ -66,4 +66,4 @@ var UserModule = (function() {
     saveBackground: saveBackground
   };
 
-}());
+}(window.localStorage));

@@ -1,11 +1,11 @@
-var TaskModule = (function() {
+var TaskModule = (function(localStorage) {
   'use strict';
 
   // Hidden variables and functions
   var taskID = 0;
 
   function getTasksFromLocalStorage() {
-    return JSON.parse(window.localStorage.getItem('SavedTasks')) || [];
+    return JSON.parse(localStorage.getItem('SavedTasks')) || [];
   }
 
   // Exposed functions
@@ -34,7 +34,7 @@ var TaskModule = (function() {
         };
 
     allTasks.push(newTask);
-    window.localStorage.setItem('SavedTasks', JSON.stringify(allTasks));
+    localStorage.setItem('SavedTasks', JSON.stringify(allTasks));
 
     return newTask;
   }
@@ -49,7 +49,7 @@ var TaskModule = (function() {
           return false;
         });
 
-    window.localStorage.setItem('SavedTasks', JSON.stringify(filteredTasks));
+    localStorage.setItem('SavedTasks', JSON.stringify(filteredTasks));
   }
 
   return {
@@ -59,4 +59,4 @@ var TaskModule = (function() {
     removeTaskFromLocalStorage: removeTaskFromLocalStorage
   };
 
-}());
+}(window.localStorage));
