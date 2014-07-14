@@ -1,11 +1,16 @@
 {
-  "name": "jQuery Practice",
+  "name": "Google images slider",
   "version": "0.0.0",
   "homepage": "https://github.com/lostm1nd/HackBulgaria",
   "authors": [
     "Deyan Yanakiev <kliomba@abv.bg>"
   ],
-  "description": "Some fairly simple tasks with jquery",
+  "description": "Simple slider showing images from google search",
+  "keywords": [
+    "slider",
+    "images",
+    "google"
+  ],
   "license": "MIT",
   "private": true,
   "ignore": [
@@ -16,8 +21,7 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.2.0",
     "jquery": "~2.1.1",
-    "handlebars": "~1.3.0"
+    "bootstrap": "~3.2.0"
   }
 }
