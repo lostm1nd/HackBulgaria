@@ -27,9 +27,8 @@ $(document).ready(function() {
         bgColor = $form.find('input[name="background"]').val(),
         fileReader;
 
-    if (userName) {
-      UserModule.saveUsername(userName);
-    }
+    UserModule.saveUsername(userName);
+    UserModule.saveBackground(bgColor);
 
     if (avatar.length > 0) {
       fileReader = new FileReader();
@@ -39,10 +38,6 @@ $(document).ready(function() {
         var srcData = fileLoadedEvent.target.result;
         UserModule.saveAvatar(srcData);
       };
-    }
-
-    if (bgColor) {
-      UserModule.saveBackground(bgColor);
     }
   }
 

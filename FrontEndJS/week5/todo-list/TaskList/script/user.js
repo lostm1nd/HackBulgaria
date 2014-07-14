@@ -7,46 +7,44 @@ var UserModule = (function(localStorage) {
       $wrapper = $('#wrapper');
 
   function updateGreeting(name) {
-    $greeting.text('Hello, ' + name);
+    if (name) {
+      $greeting.text('Hello, ' + name);
+    }
   }
 
   function updateAvatar(dataString) {
-    $avatarContainer.attr('src', dataString);
+    if (dataString) {
+      $avatarContainer.attr('src', dataString);
+    }
   }
 
   function updateBackground(color) {
-    $wrapper.css('background-color', color);
+    if (color) {
+      $wrapper.css('background-color', color);
+    }
   }
 
   // Exposed functions
   function loadUser(taskTemplate, $taskContainer) {
-    var tasks = JSON.parse(localStorage.getItem('SavedTasks')),
+    var tasks = JSON.parse(localStorage.getItem('SavedTasks')) || [],
         username = localStorage.getItem('Username'),
         avatar = localStorage.getItem('Avatar'),
         background = localStorage.getItem('Background');
 
-    if (tasks) {
-      tasks.forEach(function(task) {
-        TaskModule.addTasksToList(task, taskTemplate, $taskContainer);
-      });
-    }
+    tasks.forEach(function(task) {
+      TaskModule.addTasksToList(task, taskTemplate, $taskContainer);
+    });
 
-    if (username) {
-      updateGreeting(username);
-    }
-
-    if (avatar) {
-      updateAvatar(avatar);
-    }
-
-    if (background) {
-      updateBackground(background);
-    }
+    updateGreeting(username);
+    updateAvatar(avatar);
+    updateBackground(background);
   }
 
   function saveUsername(name) {
-    localStorage.setItem('Username', name);
-    updateGreeting(name);
+    if (name) {
+      localStorage.setItem('Username', name);
+      updateGreeting(name);
+    }
   }
 
   function saveAvatar(dataString) {
@@ -55,8 +53,10 @@ var UserModule = (function(localStorage) {
   }
 
   function saveBackground(color) {
-    localStorage.setItem('Background', color);
-    updateBackground(color);
+    if (color) {
+      localStorage.setItem('Background', color);
+      updateBackground(color);
+    }
   }
 
   return {
