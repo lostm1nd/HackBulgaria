@@ -33,46 +33,22 @@ define(['utils', 'json'], function(utils, jsonModule) {
 
     var jsonBuilder = jsonModule.getJSONBuilder(),
         groupSize = $filterMenu.find('.group-menu').find('input').val(),
-        shuffledStudents = _.shuffle(filteredStudents),
-        ungroupedStudents = shuffledStudents.length % groupSize;
+        shuffledStudents = _.shuffle(filteredStudents);
 
     groupSize = parseInt(groupSize, 10);
-
     teamCounter = 1;
     peopleInGroup = 0;
     backgroundColor = utils.getRandomRgbColor();
 
-    if (ungroupedStudents === 0 || ungroupedStudents > groupSize / 2) {
+    $(shuffledStudents).each(function() {
+      jsonBuilder.addData('Team ' + teamCounter, $(this).data('name'));
+      appendCloneToModal($(this));
+      peopleInGroup += 1;
 
-      $(shuffledStudents).each(function() {
-        jsonBuilder.addData('Team ' + teamCounter, $(this).data('name'));
-        appendCloneToModal($(this));
-        peopleInGroup += 1;
-
-        if (peopleInGroup == groupSize) {
-          getNextTeam();
-        }
-      });
-
-    } else {
-
-      var offset = 1;
-      $(shuffledStudents).each(function() {
-        jsonBuilder.addData('Team ' + teamCounter, $(this).data('name'));
-        appendCloneToModal($(this));
-        peopleInGroup += 1;
-
-        if (peopleInGroup - offset == groupSize) {
-          getNextTeam();
-
-          ungroupedStudents -= 1;
-          if (ungroupedStudents === 0) {
-            offset = 0;
-          }
-        }
-      });
-
-    }
+      if (peopleInGroup == groupSize) {
+        getNextTeam();
+      }
+    });
 
     $modal.append($closeModalBtn);
     $modal.foundation('reveal', 'open');
