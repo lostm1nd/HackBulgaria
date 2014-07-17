@@ -1,0 +1,22 @@
+{
+  "name": "Multiplayer Pong",
+  "version": "0.0.0",
+  "homepage": "https://github.com/lostm1nd/HackBulgaria",
+  "authors": [
+    "Deyan Yanakiev <kliomba@abv.bg>"
+  ],
+  "description": "Simple multiplayer pong using sockets",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "socket.io-client": "~1.0.6"
+  }
+}

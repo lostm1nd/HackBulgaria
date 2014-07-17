@@ -9,8 +9,6 @@
 		}
 
 		canvas {
-			width: 800px;
-			height: 500px;
 			margin: 0 auto;
 			margin-top: 12px;
 		}
@@ -27,10 +25,13 @@
 	<canvas id="table" width="800" height="500">
 		Ping pong game made with canvas.
 	</canvas>
-	<p>Controls are W/S for left paddle and Up/Down for right paddle</p>
+	<p>Up/Down arrows control the player paddle</p>
 	<script src="bower_components/socket.io-client/socket.io.js"></script>
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="input-handlers.js"></script>
-	<script type="text/javascript" src="ping-pong.js"></script>
+	<script src="pong-ball.js"></script>
+	<script src="pong-paddle.js"></script>
+	<script src="pong-drawer.js"></script>
+	<script src="pong.js"></script>
 </body>
 </html>
