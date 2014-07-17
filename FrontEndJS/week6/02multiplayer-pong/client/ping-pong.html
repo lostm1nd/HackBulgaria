@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		body {
+			background-color: #ccc;
+		}
+
+		canvas {
+			width: 800px;
+			height: 500px;
+			margin: 0 auto;
+			margin-top: 12px;
+		}
+
+		p {
+			width: 800px;
+			margin: 10px auto;
+			text-align: center;
+			font-size: 125%;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="table" width="800" height="500">
+		Ping pong game made with canvas.
+	</canvas>
+	<p>Controls are W/S for left paddle and Up/Down for right paddle</p>
+	<script src="bower_components/socket.io-client/socket.io.js"></script>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="input-handlers.js"></script>
+	<script type="text/javascript" src="ping-pong.js"></script>
+</body>
+</html>
