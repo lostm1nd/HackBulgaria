@@ -1,3 +1,5 @@
+/* globals require, console */
+
 (function() {
   'use strict';
 

@@ -218,15 +218,16 @@
 
 			$.ajax({
 				type: 'POST',
-	        url: 'http://localhost:3000/createGame',
-	        contentType: 'application/json',
-	        data: JSON.stringify({
-	          playerName: userName,
-	          socketId: socketId
-	        })}).done(function(data) {
-	        gameId = data.gameId;
-	        console.log(data);
-	      });
+				url: 'http://localhost:3000/createGame',
+				contentType: 'application/json',
+				data: JSON.stringify({
+				playerName: userName,
+				socketId: socketId
+				})
+			}).done(function(data) {
+				gameId = data.gameId;
+				console.log(data);
+			});
 
 		}
 
@@ -234,16 +235,17 @@
 			gameId = prompt('Enter game id to join');
 
 			$.ajax({
-        url: 'http://localhost:3000/joinGame',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({
-          playerName: userName,
-          socketId: socketId,
-          gameId: gameId
-          })}).done(function(result) {
-          console.log(result);
-        });
+				url: 'http://localhost:3000/joinGame',
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify({
+				playerName: userName,
+				socketId: socketId,
+				gameId: gameId
+				})
+			}).done(function(result) {
+				console.log(result);
+			});
 		}
 	}
 
