@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Triangle Drawer</title>
+	<style>
+		section {
+			width: 648px;
+			margin: 0 auto;
+			border: 8px solid #cec;
+		}
+		.menu {
+			padding: 6px 12px;
+			background-color: #cec;
+		}
+		.menu a {
+			display: inline-block;
+			width: 25px;
+			height: 25px;
+			text-indent: -9999px;
+			background-image: url('images/sprite.png');
+			background-position: 0 0;
+			background-repeat: no-repeat;
+		}
+		.menu a:nth-child(n+2) {
+			margin-left: 4px;
+		}
+		.menu #save {
+			background-position: -25px 0;
+		}
+		.menu #undo {
+			background-position: -50px 0;
+		}
+		.menu label {
+			display: inline-block;
+			height: 25px;
+			line-height: 25px;
+			margin-left: 12px;
+		}
+		.menu input[type='color'] {
+			padding: 0;
+			border: 0;
+			outline: 0;
+		}
+		.middle {
+			vertical-align: middle;
+		}
+	</style>
+</head>
+<body>
+	<section>
+		<div class="menu">
+			<a href="#" id="clear">Clear</a>
+			<a href="#" id="undo">Undo</a>
+			<a href="#" id="save">Save</a>
+			<label>
+				<span class="middle">Fill</span>
+				<input type="color" id="fill-color" class="middle">
+			</label>
+			<label>
+				<span class="middle">Stroke</span>
+				<input type="color" id="stroke-color" class="middle">
+			</label>
+		</div>
+		<canvas id="drawing-board" width="640" height="480">
+			
+		</canvas>
+	</section>
+
+	<script id="options-template" type="text/x-handlebars-template">
+		<select id="saved-drawings">
+			<option disabled="disabled" selected="selected">Load drawing</option>
+			{{#each drawings}}
+			<option value="{{this}}">{{this}}</option>
+			{{/each}}
+		</select>
+	</script>
+
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/handlebars/handlebars.min.js"></script>
+	<script src="utils.js"></script>
+	<script src="app.js"></script>
+</body>
+</html>
