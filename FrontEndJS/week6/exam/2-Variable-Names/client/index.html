@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Variable Names</title>
+</head>
+<style>
+	#names {
+		width: 80%;
+		margin: 0 auto;
+		text-align: center;
+	}
+</style>
+<body>
+	<section id="names"></section>
+	
+	<script id="name-template" type="text/x-handlebars-template">
+	{{#each names}}
+		<p>
+			<label><input type="text" data-nameId="{{nameId}}" value="{{name}}"></label>
+			<button disabled="disabled">Update Name</button>
+		</p>
+	{{/each}}
+	</script>
+	
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/handlebars/handlebars.min.js"></script>
+	<script src="app.js"></script>
+</body>
+</html>
