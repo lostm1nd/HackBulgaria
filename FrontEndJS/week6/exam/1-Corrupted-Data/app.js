@@ -8,11 +8,10 @@
   data.forEach(function(checkin) {
 
     var studentId = checkin.fields.student,
-        foundDuplicate;
+        foundDuplicate = false;
 
     if (unique[studentId]) {
 
-      foundDuplicate = false;
       unique[studentId].forEach(function(studentCheckin) {
         if (studentCheckin.fields.date === checkin.fields.date) {
           foundDuplicate = true;
@@ -25,8 +24,7 @@
       }
 
     } else {
-      unique[studentId] = [];
-      unique[studentId].push(checkin);
+      unique[studentId] = [checkin];
     }
 
   });

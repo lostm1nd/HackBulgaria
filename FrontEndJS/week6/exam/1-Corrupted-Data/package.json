@@ -1,0 +1,23 @@
+{
+  "name": "1-Corrupted-Data",
+  "version": "0.0.0",
+  "description": "Hack Bulgaria exam2 task1",
+  "main": "app-lodash.js",
+  "dependencies": {
+    "lodash": "~2.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lostm1nd/HackBulgaria"
+  },
+  "author": "Deyan Yanakiev <kliomba@abv.bg>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lostm1nd/HackBulgaria/issues"
+  },
+  "homepage": "https://github.com/lostm1nd/HackBulgaria"
+}
