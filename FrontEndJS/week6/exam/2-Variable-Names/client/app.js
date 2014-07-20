@@ -21,17 +21,16 @@ $(function() {
   $.ajax({
     type: 'GET',
     url: 'http://localhost:8080/names',
-    dataType: 'json',
-    success: function(names) {
-      var html = nameTemplate({
-        names: names
-      });
+    dataType: 'json'
+  })
+  .then(function success(names) {
+    var html = nameTemplate({
+      names: names
+    });
 
-      $namesContainer.append(html);
-    },
-    error: function() {
-      alert('There is a problem with the server. Try later.');
-    }
+    $namesContainer.append(html);
+  }, function error() {
+    alert('There is a problem with the server. Try later.');
   });
 
   function updateName(name, nameId) {
@@ -42,15 +41,14 @@ $(function() {
       data: JSON.stringify({
         name: name,
         nameId: nameId
-      }),
-      success: function() {
-        alert('Name saved to database.');
-        window.location.reload();
-      },
-      error: function() {
-        alert('Coult not save name to database.');
-        window.location.reload();
-      }
+      })
+    })
+    .then(function success() {
+      alert('Name saved to database.');
+      window.location.reload();
+    }, function error() {
+      alert('Coult not save name to database.');
+      window.location.reload();
     });
   }
 
