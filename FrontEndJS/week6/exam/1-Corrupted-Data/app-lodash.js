@@ -2,10 +2,7 @@
   'use strict';
 
   var _ = require('lodash'),
-      data = require('./data'),
-      grouped = _.groupBy(data.slice(0, 10), function(checkin) {
-        return checkin.fields.student + '-' + checkin.fields.date;
-      });
+      data = require('./data');
 
   _.chain(data)
     .groupBy(function(checkin) {
