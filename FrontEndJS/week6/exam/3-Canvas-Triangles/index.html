@@ -61,6 +61,9 @@
 				<span class="middle">Stroke</span>
 				<input type="color" id="stroke-color" class="middle">
 			</label>
+			<select id="saved-drawings">
+				<option disabled="disabled" selected="selected">Load drawing</option>
+			</select>
 		</div>
 		<canvas id="drawing-board" width="640" height="480">
 			
@@ -68,12 +71,9 @@
 	</section>
 
 	<script id="options-template" type="text/x-handlebars-template">
-		<select id="saved-drawings">
-			<option disabled="disabled" selected="selected">Load drawing</option>
-			{{#each drawings}}
-			<option value="{{this}}">{{this}}</option>
-			{{/each}}
-		</select>
+		{{#each drawings}}
+		<option value="{{this}}">{{this}}</option>
+		{{/each}}
 	</script>
 
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>

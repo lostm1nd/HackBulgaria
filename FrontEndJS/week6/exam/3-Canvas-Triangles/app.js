@@ -7,14 +7,14 @@ $(function() {
       context = canvas.getContext('2d'),
       fillColor = '#000',
       strokeColor = '#000',
+      savedDrawings = Object.keys(localStorage),
+      restorePoints = [],
       trianglePoints = [],
-      savedDrawings = Object.keys(localStorage);
+      initialCanvasState = canvas.toDataURL();
 
   // App initialization
   if (savedDrawings.length > 0) {
-    $('div.menu').append(drawingsTemplate({
-      drawings: savedDrawings
-    }));
+    loadSavedDrawings(savedDrawings);
   }
 
   // Event handlers
@@ -23,7 +23,9 @@ $(function() {
   });
 
   $('#undo').on('click', function() {
-    context.restore();
+    loadImageOnCanvas(restorePoints.pop());
+
+    trianglePoints.pop();
   });
 
   $('#save').on('click', function() {
@@ -33,8 +35,10 @@ $(function() {
     if (drawingName) {
       dataUrl = canvas.toDataURL();
       localStorage.setItem(drawingName, dataUrl);
+      loadSavedDrawings(drawingName);
+      initialCanvasState = canvas.toDataURL();
     } else {
-      alert('Drawing is not saved.');
+      alert('Drawing can not be saved without a name.');
     }
   });
 
@@ -47,12 +51,14 @@ $(function() {
   });
 
   $('div.menu').on('change', '#saved-drawings', function() {
-    var imageObj = new Image();
-    imageObj.onload = function() {
-      context.drawImage(this, 0, 0);
-    };
+    var dataUrl = localStorage.getItem($(this).val());
 
-    imageObj.src = localStorage.getItem($(this).val());
+    if (!isCanvasBlank() && confirm('Do you want to save this drawing first?')) {
+      $('#save').trigger('click');
+    }
+
+    $('#clear').trigger('click');
+    loadImageOnCanvas(dataUrl);
   });
 
   $(canvas).on('click', function(ev) {
@@ -63,6 +69,12 @@ $(function() {
     if (trianglePoints.length === 3) {
       drawTriangle();
       trianglePoints.length = 0;
+    }
+
+    restorePoints.push(canvas.toDataURL());
+
+    if (restorePoints.length > 5) {
+      restorePoints.shift();
     }
   });
 
@@ -86,5 +98,29 @@ $(function() {
     context.closePath();
     context.fill();
     context.stroke();
+  }
+
+  function loadImageOnCanvas(dataUrl) {
+    var imageObj = new Image();
+    imageObj.onload = function() {
+      context.drawImage(this, 0, 0);
+      initialCanvasState = canvas.toDataURL();
+    };
+
+    imageObj.src = dataUrl;
+  }
+
+  function loadSavedDrawings(drawings) {
+    if (!Array.isArray(drawings)) {
+      drawings = [drawings];
+    }
+
+    $('#saved-drawings').append(drawingsTemplate({
+      drawings: drawings
+    }));
+  }
+
+  function isCanvasBlank() {
+    return initialCanvasState === canvas.toDataURL();
   }
 });
