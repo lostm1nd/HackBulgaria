@@ -34,30 +34,36 @@
     hostId = data.host;
     InputModule.initKeyHandlers(socket, hostId, gameId);
 
-    newGame();
-    gameLoop();
+
+    if (socketId === hostId) {
+      newGame();
+      gameLoop();
+    }
+
   });
 
   socket.on('render', onRenderHandler);
 
   function gameLoop() {
+    // The host emits the game info
+    // so the partner can update itself
+    socket.emit('move', {
+      gameId: gameId,
+      type: 'gameInfo',
+      ball: JSON.stringify(ball),
+      hostScore: hostScore,
+      partnerScore: otherPlayerScore,
+      hostPaddle: JSON.stringify(hostPaddle),
+      partnerPaddle: JSON.stringify(otherPaddle)
+    });
+
     renderer.drawTable(hostPaddle, otherPaddle);
-    // renderer.drawScores(hostScore, otherPlayerScore);
+    renderer.drawScores(hostScore, otherPlayerScore);
     renderer.drawBall(ball);
 
-    // Only the host updates the
-    // ball position.
-    if (socketId === hostId) {
-      ball.x += ball.velX;
-      ball.y += ball.velY;
-
-      socket.emit('move', {
-        gameId: gameId,
-        type: 'ball',
-        x: ball.x,
-        y: ball.y
-      });
-    }
+    // Update ball position
+    ball.x += ball.velX;
+    ball.y += ball.velY;
 
     // Both player update their paddles.
     paddles.forEach(function(paddle) {
@@ -104,12 +110,12 @@
   function newGame() {
     ball.restore();
 
-    socket.emit('move', {
-      gameId: gameId,
-      type: 'ball',
-      x: ball.x,
-      y: ball.y
-    });
+    // socket.emit('move', {
+    //   gameId: gameId,
+    //   type: 'ball',
+    //   x: ball.x,
+    //   y: ball.y
+    // });
 
     var rnd = getRandomInt(1, 10);
 
@@ -123,32 +129,36 @@
   }
 
   function onRenderHandler(data) {
-    if (data.type === 'ball') {
-      ball.x = data.x;
-      ball.y = data.y;
+    if (socketId !== hostId && data.type === 'gameInfo') {
+      renderer.drawTable(JSON.parse(data.hostPaddle), JSON.parse(data.partnerPaddle));
+      renderer.drawScores(data.hostScore, data.partnerScore);
+      renderer.drawBall(JSON.parse(data.ball));
     }
 
-    if (data.type === 'paddleMoveUp') {
-      if (data.isHost) {
-        hostPaddle.velocity = -5;
-      } else {
-        otherPaddle.velocity = -5;
+    // WELCOME TO THE UGLINESS
+    if (socketId === hostId) {
+      if (data.type === 'paddleMoveUp') {
+        if (data.isHost) {
+          hostPaddle.velocity = -5;
+        } else {
+          otherPaddle.velocity = -5;
+        }
       }
-    }
 
-    if (data.type === 'paddleMoveDown') {
-      if (data.isHost) {
-        hostPaddle.velocity = 5;
-      } else {
-        otherPaddle.velocity = 5;
+      if (data.type === 'paddleMoveDown') {
+        if (data.isHost) {
+          hostPaddle.velocity = 5;
+        } else {
+          otherPaddle.velocity = 5;
+        }
       }
-    }
 
-    if (data.type === 'paddleMoveStop') {
-      if (data.isHost) {
-        hostPaddle.velocity = 0;
-      } else {
-        otherPaddle.velocity = 0;
+      if (data.type === 'paddleMoveStop') {
+        if (data.isHost) {
+          hostPaddle.velocity = 0;
+        } else {
+          otherPaddle.velocity = 0;
+        }
       }
     }
   }

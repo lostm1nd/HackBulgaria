@@ -49,9 +49,9 @@ var PongDrawer = (function() {
 
   Drawer.prototype.drawScores = function drawScores(leftScore, rightScore) {
     this.context.fillStyle = '#fff';
-    context.font = '30px sans-serif';
-    context.fillText('' + leftScore, this.canvas.width / 2 - 40, 40);
-    context.fillText('' + rightScore, this.canvas.width / 2 + 40, 40);
+    this.context.font = '30px sans-serif';
+    this.context.fillText('' + leftScore, this.canvas.width / 2 - 40, 40);
+    this.context.fillText('' + rightScore, this.canvas.width / 2 + 40, 40);
   };
 
   return {
