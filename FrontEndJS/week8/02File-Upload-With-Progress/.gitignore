@@ -1,0 +1,8 @@
+# Node modules
+node_modules
+
+# Temp server files 
+tmp/*
+
+# Bower modules
+bower_components
