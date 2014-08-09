@@ -1,0 +1,21 @@
+{
+  "name": "Dran-and-drop-file-upload",
+  "version": "0.1",
+  "homepage": "https://github.com/lostm1nd/HackBulgaria",
+  "authors": [
+    "Deyan Yanakiev <kliomba@abv.bg>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.14",
+    "q": "1.0.1"
+  }
+}

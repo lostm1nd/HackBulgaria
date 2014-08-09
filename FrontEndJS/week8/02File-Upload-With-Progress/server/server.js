@@ -26,7 +26,7 @@ app.post("/fileUpload", function(req, res) {
       form.keepExtensions = true;     //keep file extension
 
   form.parse(req, function(err, fields, files) {
-    console.log(fields)
+    console.log(fields);
     console.log(files);
 
     res.json({

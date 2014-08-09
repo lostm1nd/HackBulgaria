@@ -4,6 +4,12 @@
 	<meta charset="UTF-8">
 	<title>Drag and drop file upload</title>
 	<style>
+	h1 {
+		width: 500px;
+		text-align: center;
+		margin: 12px auto;
+	}
+
 	#upload {
 		width: 500px;
 		height: 500px;
@@ -16,13 +22,30 @@
 		background-color: #fff;
 		border: 2px dashed #f33;
 	}
+
+	#statusbar {
+		width: 500px;
+		height: 25px;
+		margin: 0 auto;
+		border: 2px solid #999;
+		margin-top: 20px;
+	}
+
+	#status {
+		height: 25px;
+		width: 0%;
+		background-color: #393;
+	}
 	</style>
 </head>
 <body>
-	<div id="upload">
-		
+	<h1>Drag &amp; drop files to upload them</h1>
+
+	<div id="upload" name="filedata"></div>
+
+	<div id="statusbar">
+		<div id="status"></div>
 	</div>
-	<div id="status"></div>
 
 	<script src="bower_components/requirejs/require.js" data-main="app"></script>
 </body>
