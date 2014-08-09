@@ -1,0 +1,5 @@
+<label>
+	<span>Enter nickname:</span>
+	<input type="text" class="login-name">
+</label>
+<button class="login-btn">Enter</button>
