@@ -1,3 +1,5 @@
+import Data.Char
+
 -- task 30
 concatenate :: [a] -> [a] -> [a]
 concatenate xs ys = xs ++ ys
@@ -52,3 +54,8 @@ multiplyBy x = \y -> x * y
 lastDigits :: Integral a => [a] -> [a]
 lastDigits [] = []
 lastDigits (x:xs) = (mod x 10) : lastDigits xs
+
+-- task 40
+stringsToIntegers :: [String] -> [Int]
+stringsToIntegers = map fst . map (foldr parse (0,1))
+	where parse = (\x acc -> (fst acc + snd acc * (digitToInt x), snd acc * 10 ))
