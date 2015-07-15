@@ -1,146 +1,82 @@
-# IO in Haskell
+# Web Haskell
 
-Haskell is a pure functional language. We have pure functions with no side effects.
+## Stackage
 
-IO is a side-effect by nature.
+It is an index of mutually stable library versions in [Hackage](http://hackage.haskell.org/). 
+It is created automatically with building and testing different version of libraries from [Hackage](http://hackage.haskell.org/) on many operating systems. 
+Index description is kept in a single file [cabal.config](https://www.stackage.org/lts/cabal.config) which should be put along with cabal file in same folder.
 
-So it is interesting how we can handle that.
+## DSL
 
-[A good way to see more about Input and Output in Haskell is to read that chapter](http://learnyouahaskell.com/input-and-output)
+DSL = Domain Specific Language
+They are used to constrain operations to certain well defined and tested set. DSLs are usually easier to read and modify even by non-programmers. They are easier to test and proof, because of the constrained domain.
+In Haskell it is easy to make DSL and they are widely used.
 
-## Hello World in Haskell
+## TemplateHaskell, QuasiQuotations and ChichkoviteChervenotikvenovcheta
 
-Here is the `hello.hs` program:
+[QuasiQuotations](https://wiki.haskell.org/Quasiquotation) - a GHC extension for embedding DSLs (EDSL) inside Haskell code
+[TemplateHaskell](https://wiki.haskell.org/Template_Haskell) - a GHC extension for type-safe compile-time meta programming
+ChichkoviteChervenotikvenovcheta - extension for testing your speak skills
+
+## Shakespearean templates
+
+[They](http://www.yesodweb.com/book/shakespearean-templates) are type-safe EDSL for HTML, CSS and JavaScript description. Coming from Yesod framework.
+
+## FP Complete
+
+Cloud based IDE for Haskell - [www.fpcomplete.com](https://www.fpcomplete.com)
+
+## Simple example
 
 ```haskell
-main = putStrLn "Hello World"
-```
+{-# LANGUAGE TypeFamilies, QuasiQuotes, TemplateHaskell #-}
+module Main where
 
-We can run the program with the `runhaskell` command:
+import Yesod
 
-```
-$ runhaskell hello.hs
-Hello World
-```
+data App = App
 
-The `main` function is the function that ghc calls to start our Haskell program.
+instance Yesod App
 
-Lets check the type of our `main` function in ghci:
+mkYesod "App" [parseRoutes| / HomeR  GET |]
 
+getWorldR = defaultLayout $ [whamlet| <p> Hello World! |]
 
-```
-Prelude> :l hello.hs
-Prelude> :t main
 main :: IO ()
+main = warp 3000 App
 ```
 
-It is an empty IO operation.
+Can also be found here:  https://www.fpcomplete.com/user/varosi/minimalistic-yesod-server
 
-IO is a special type, that wraps data, that comes from input or goes to the output. This is Haskell's way of dealing with side effects & impure data.
+## cabal install
 
-**Everything that touches IO, must become IO!**
+Note that it could take 15min on Core i7 first time for Yesod libraries to build.
 
-Lets check the type of `putStrLn` in ghci:
+1. wget https://www.stackage.org/lts/cabal.config
+2. cabal sandbox init
+3. cabal install
 
-```
-Prelude> :t putStrLn
-putStrLn :: String -> IO()
-```
+## Preparation
 
-Again, we take a String and we return an empty IO operation.
+You'll need your code about fractals image generation.
 
-## Printing
+Search help install:
 
-There are two general functions, that we are going to use to output something to the console:
+* [Hoogle](https://www.haskell.org/hoogle/)
+* [Hayoo!](http://hayoo.fh-wedel.de)
 
-* `putStrLn :: String -> IO ()`
-* `print :: Show a => a -> IO()`
+## Tasks
 
-As you can see, `print` is more convinient, because it takes something, that can be showed. Sweet.
+1. Make basic example run
+2. Modify basic example say "Hey, " and your name answering on /hey/{YourName}
+3. Show Mandelbrot fractal on /mandelbrot
+4. Pass fractal image size on URL
 
-## Do notation
-
-We want our `main` function to behave like a normal procedural function - to do a sequence of reads and writes, taking the result wherever we need that.
-
-The `do` notation has the following syntax:
+## Helping snippet
 
 ```haskell
-main = do
-  print 5
-  print [1, 2, 3]
-  putStrLn "Hello World"
+getHelloR :: MonadHandler m => m TypedContent
+getHelloR = sendResponse $ toTypedContent (typePlain, toContent "Say Haskell!")
 ```
 
-This will execute the functions in the order we have called them. Sweet.
-
-## Reading from the input
-
-Now, lets take some input from our user.
-
-For that, we have the function `getLine :: IO String`.
-
-First, lets see an example in `read.hs`:
-
-```haskell
-main = do
-  name <- getLine
-  putStrLn $ concat ["Hello ", name]
-```
-
-and:
-
-```
-$ runhaskell read.hs
-Rado
-Hello Rado
-```
-
-Now, there are a few things that are happening right now:
-
-* The type `IO String` is interesting
-* There is new operator - the `<-` arrow
-
-`IO String` means **tainted data**. Something impure is about to happen. That's why Haskell wraps the `String` within `IO`
-
-**In Haskell, there is no sane way to have the following function:**
-
-```
-somethingUnsafe :: IO String -> String
-```
-
-The magic happens thanks to the `<-` operator.
-
-You can read it as **unboxing** the pure value from impure operation. This will extract the `String` from `IO String`. But there is a cost. You can only extract the `String` to give it to a pure function.
-
-But the funciton that uses `IO String` **must** return something from the `IO` type. We cannot escape.
-
-## A small program
-
-Lets have a program that reads one integer and prints the prime factorization of that integer:
-
-```haskell
-times :: Int -> Int -> Int
-times x y
-    | rem x y == 0 = 1 + times (div x y) y
-    | otherwise = 0
-
-isPrime :: Int -> Bool
-isPrime x = [x] == [ y | y <- [2..x], rem x y == 0]
-
-primeFactorization :: Int -> [(Int, Int)]
-primeFactorization x = [ (y, times x y) | y <- [2..x], isPrime y, rem x y == 0]
-
-main = do
-  rawN <- getLine
-  let n = read rawN
-  print $ primeFactorization n
-```
-
-We have a new part - `let n = read rawN`
-
-Now, we have two things to consider in our main:
-
-* The `<-` operator takes the pure value from a `IO` operation
-* `let` with `=` can create new pure value from another pure value. You cannot take value from `IO` operation.
-
-This is it. Now we have the basic stuff.
+"Say Haskell!" string may be changed with anything that is ByteString.
