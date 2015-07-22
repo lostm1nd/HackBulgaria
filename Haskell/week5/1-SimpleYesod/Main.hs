@@ -1,4 +1,4 @@
-{-# LANGUAGE TypeFamilies, QuasiQuotes, TemplateHaskell, ViewPatterns #-}
+{-# LANGUAGE TypeFamilies, QuasiQuotes, TemplateHaskell, ViewPatterns, OverloadedStrings #-}
 
 module Main where
 
@@ -25,7 +25,7 @@ getHelloR = sendResponse $ toTypedContent (typePlain, toContent "Say Haskell!")
 
 getHeyR name = defaultLayout $ [whamlet| <p> Hello #{name} |]
 
-getMandlebrotR :: MonadHandler m => Int -> Int -> m TypedContent
+getMandlebrotR :: MonadHandler m => m TypedContent
 getMandlebrotR = sendResponse $ toTypedContent
 	(typePng, toContent (encodePng $ generateImage (render (drawMandelbrot 600 600)) 600 600))
 
