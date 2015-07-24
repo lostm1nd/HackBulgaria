@@ -37,7 +37,8 @@ instance Alternative Parser where
   empty = Parser (\_ -> Nothing)
   l <|> r = Parser (\str -> parse l str <|> parse r str)
 
-oneOrMore, zeroOrMore  :: Parser a -> Parser [a]
-oneOrMore = parse + zeroOrMore
+oneOrMore :: Parser a -> Parser [a]
+oneOrMore p = (:) <$> p <*> zeroOrMore p
 
-zeroOrMore = oneOrMore <|> empty
+zeroOrMore :: Parser a -> Parser [a]
+zeroOrMore p = oneOrMore p <|> pure []
