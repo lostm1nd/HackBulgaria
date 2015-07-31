@@ -1,2 +1,2 @@
 join :: Monad m => m (m a) -> m a
-join ms = ms >>= (\m -> m)
+join ms = ms >>= id
