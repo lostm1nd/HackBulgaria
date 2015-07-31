@@ -85,8 +85,11 @@ ifP = liftA2 If
 forP :: Parser Statement
 forP = For <$> (string "for" *> char '(' *> statement) <*>
         (char ';' *> expr) <*>
-        (char ';' *> statement) <*>
+        (char ';' *> statement <* char ')') <*>
         (char '{' *> statement <* char '}')
 
 statement :: Parser Statement
 statement = assignP <|> incrP <|> decrP <|> ifP <|> forP
+
+interpret :: Parser [Statement]
+interpret = oneOrMore statement
