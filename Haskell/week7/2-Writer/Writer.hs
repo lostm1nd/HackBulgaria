@@ -1,3 +1,5 @@
+module Writer where
+
 import Data.Monoid
 import Control.Applicative
 
